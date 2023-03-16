@@ -58,42 +58,86 @@ public class Cliente {
     }
     ////////////////////// é pra retornar ou pra printar??? é pra retornar o nome mesmo ?????  ///////////////////////////////////////////////////////////////////////////
     public void ToString (){
+        //concatenar todos os atributos do objeto
         System.out.print(nome);
-        return nome;
+        //return nome;
     }
     
-    public Boolean ValidarCPF(String cpf) {
+    public Boolean validarCPF(String cpf) {
+        //remover todos os caracteres não numericos do CPF
+        cpf = cpf.replaceAll("[^0-9]","");
         
-        cpf.replaceAll("[^0-9]","");
-        
+        //verificar se o CPF tem 11 digitos
         if (cpf.length() != 11) {
             return false;
         }
         
-        for ////
-        int soma=0,resto=0;
-        int j = 0;
-        
-        for (int i=10; i>=2;i--) {
-            soma += i*Integer.parseInt(cpf.charAt(j));
-            j++;
+        //verificar se todos os digitos sao iguais
+        char firstDigit = cpf.charAt(0);  
+        char digit;
+        int i=0;
+        for (i=1; i<11; i++) {
+            digit = cpf.charAt(i);
+            if (digit != firstDigit) {
+                break;
+            }
         }
-        resto  = (soma*10)%11;
-        
-        if (resto != Integer.parseInt(cpf.charAt(9))){
+        if (i==11) {
             return false;
         }
-
+        //calcular digitos verificadores
+        int soma=0,resto=0;
+        int j = 0,aux=0,d1=0;
+        for (i=10; i>=2;i--) {
+            aux = Character.getNumericValue(cpf.charAt(j));
+            soma += i*aux;
+            j++;
+        }
+        resto  = (soma)%11;
+        if (resto == 0 || resto == 1) {
+            d1 = 0;
+        }System.out.printf("i: %d\n",cpf.length());
+        
+        else {
+            d1 = 11 - resto; 
+        }
+        aux = Character.getNumericValue(cpf.charAt(9));
+        if (d1 != aux){
+            return false;
+        }
         j=0;
         soma=0;
         resto=0;
-        for (int i=11; i>=2; i--) {
-            soma += i*Integer.parseInt(cpf.charAt(j));
+        
+        int d2 = 0;
+        for (i=11; i>=2; i--) {
+            aux = Character.getNumericValue(cpf.charAt(j));
+            soma += i*aux;
             j++;
         }
-        resto  = (soma*10)%11;
-        if (resto != Integer.parseInt(cpf.charAt(10))) {
+        resto  = (soma)%11;
+        if (resto == 0 || resto == 1) {
+            d2 = 0;
+        }
+        else {
+            d2 = 11 - resto; 
+        }
+        aux = Character.getNumericValue(cpf.charAt(10));
+        if (d2 != aux) {
             return false;
         }
         return true;
+    }
+    /* 
+    public static void main(String[] args) {
+        String teste = "333.333.33-33" ;
+        if (validarCPF(teste)) {
+            System.out.print("DEU CERTO\n");
+        }
+        else {
+            System.out.print("cpf invalido\n");
+        }
+
+    }
+    */
 }
