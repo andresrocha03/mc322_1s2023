@@ -23,11 +23,11 @@ public class Cliente {
         this .nome = nome ;
     }
 
-    public String getCpf () {
+    public String getCPF () {
         return cpf ;
     }
 
-    public void setCpf ( String cpf ) {
+    public void setCPF ( String cpf ) {
         //////VERIFICAR CPF VALIDO
         this . cpf = cpf ;
     }
@@ -56,8 +56,44 @@ public class Cliente {
     public void setEndereco ( String endereco ) {
         this . endereco = endereco ;
     }
+    ////////////////////// é pra retornar ou pra printar??? é pra retornar o nome mesmo ?????  ///////////////////////////////////////////////////////////////////////////
+    public void ToString (){
+        System.out.print(nome);
+        return nome;
+    }
+    
+    public Boolean ValidarCPF(String cpf) {
+        
+        cpf.replaceAll("[^0-9]","");
+        
+        if (cpf.length() != 11) {
+            return false;
+        }
+        
+        for ////
+        int soma=0,resto=0;
+        int j = 0;
+        
+        for (int i=10; i>=2;i--) {
+            soma += i*Integer.parseInt(cpf.charAt(j));
+            j++;
+        }
+        resto  = (soma*10)%11;
+        
+        if (resto != Integer.parseInt(cpf.charAt(9))){
+            return false;
+        }
 
-    //TOSTRING
-    //VALIDAR CPF
-
+        j=0;
+        soma=0;
+        resto=0;
+        for (int i=11; i>=2; i--) {
+            soma += i*Integer.parseInt(cpf.charAt(j));
+            j++;
+        }
+        resto  = (soma*10)%11;
+        if (resto != Integer.parseInt(cpf.charAt(10))) {
+            return false;
+        }
+        return true;
 }
