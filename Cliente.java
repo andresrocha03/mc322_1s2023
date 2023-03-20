@@ -28,7 +28,6 @@ public class Cliente {
     }
 
     public void setCPF ( String cpf ) {
-        //////VERIFICAR CPF VALIDO
         this . cpf = cpf ;
     }
 
@@ -56,11 +55,10 @@ public class Cliente {
     public void setEndereco ( String endereco ) {
         this . endereco = endereco ;
     }
-    ////////////////////// é pra retornar ou pra printar??? é pra retornar o nome mesmo ?????  ///////////////////////////////////////////////////////////////////////////
-    public void ToString (){
-        //concatenar todos os atributos do objeto
-        System.out.print(nome);
-        //return nome;
+    public String toString (){
+        return "Nome: " + this.nome + "\nCPF: " + this.cpf +
+                "\nData Nascimento: " + this.dataNascimento + "\nIdade: " +
+                this.idade + "\nEndereco: " + this.endereco ;       
     }
     
     public Boolean validarCPF(String cpf) {
@@ -128,16 +126,6 @@ public class Cliente {
         }
         return true;
     }
-    /* 
-    public static void main(String[] args) {
-        String teste = "333.333.33-33" ;
-        if (validarCPF(teste)) {
-            System.out.print("DEU CERTO\n");
-        }
-        else {
-            System.out.print("cpf invalido\n");
-        }
-
-    }
-    */
+     
+    
 }
