@@ -1,13 +1,13 @@
-import java.util.random;
+
 
 public class Sinistro {
     private int id ;
     private String data ;
     private String endereco;
-
+    private static int IdGenerator = 0;
     // Construtor
     public Sinistro ( int id , String data , String endereco ) {
-        this .id                = id ;
+        this .id                = IdGenerator++ ;
         this .data              = data ;
         this .endereco          = endereco ;
     }
@@ -25,7 +25,7 @@ public class Sinistro {
         return data ;
     }
 
-    public void setData ( String cpf ) {
+    public void setData ( String data) {
         this . data = data ;
     }
 
@@ -36,12 +36,5 @@ public class Sinistro {
     public void setEndereco ( String endereco ) {
         this . endereco = endereco ;
     }
-    // a funcao random gera numneros negativos tambem, como solucionar isso?
-    public int generateId()  {
-        //instanciar objeto da classe Random
-        Ramdom id = new Ramdom();
-
-        //retornar id unico
-        return id.nextInt();
-    }
+    
 }
