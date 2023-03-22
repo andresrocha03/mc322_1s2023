@@ -6,12 +6,12 @@ public class Cliente {
     private String endereco;
 
     // Construtor
-    public Cliente ( String nome , String cpf , String dataNascimento , String idade, String endereco ) {
-        this .nome              = nome ;
-        this .cpf               = cpf ;
-        this .dataNascimento    = dataNascimento ;
-        this .idade             = idade;
-        this .endereco          = endereco ;
+    public Cliente (String nome , String cpf , String dataNascimento , String idade, String endereco ) {
+        this.nome              = nome ;
+        this.cpf               = cpf ;
+        this.dataNascimento    = dataNascimento ;
+        this.idade             = idade;
+        this.endereco          = endereco ;
     }
 
     // Getters e setters
@@ -20,7 +20,7 @@ public class Cliente {
     }
 
     public void setNome ( String nome ) {
-        this .nome = nome ;
+        this.nome = nome ;
     }
 
     public String getCPF () {
@@ -28,7 +28,7 @@ public class Cliente {
     }
 
     public void setCPF ( String cpf ) {
-        this . cpf = cpf ;
+        this.cpf = cpf ;
     }
 
     public String getDataNascimento () {
@@ -36,7 +36,7 @@ public class Cliente {
     }
 
     public void setDataNascimento ( String dataNascimento ) {
-        this . dataNascimento = dataNascimento ;
+        this.dataNascimento = dataNascimento ;
     }
 
     public String getIdade () {
@@ -44,7 +44,7 @@ public class Cliente {
     }
 
     public void setIdade ( String idade ) {
-        this . idade = idade ;
+        this.idade = idade ;
     }
  
  
@@ -53,7 +53,7 @@ public class Cliente {
     }
 
     public void setEndereco ( String endereco ) {
-        this . endereco = endereco ;
+        this.endereco = endereco ;
     }
     public String toString (){
         return "Nome: " + this.nome + "\nCPF: " + this.cpf +
@@ -61,7 +61,7 @@ public class Cliente {
                 this.idade + "\nEndereco: " + this.endereco ;       
     }
     
-    public Boolean validarCPF(String cpf) {
+    public Boolean validateCPF(String cpf) {
         //remover todos os caracteres não numericos do CPF
         cpf = cpf.replaceAll("[^0-9]","");
         
@@ -94,7 +94,7 @@ public class Cliente {
         resto  = (soma)%11;
         if (resto == 0 || resto == 1) {
             d1 = 0;
-        }System.out.printf("i: %d\n",cpf.length());
+        }
         
         else {
             d1 = 11 - resto; 

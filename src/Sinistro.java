@@ -6,7 +6,7 @@ public class Sinistro {
     private String endereco;
     private static int IdGenerator = 0;
     // Construtor
-    public Sinistro ( int id , String data , String endereco ) {
+    public Sinistro (String data , String endereco ) {
         this .id                = IdGenerator++ ;
         this .data              = data ;
         this .endereco          = endereco ;
