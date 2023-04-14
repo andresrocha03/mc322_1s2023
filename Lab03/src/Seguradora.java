@@ -99,18 +99,14 @@ public class Seguradora {
         return listaClientesPJ;
     }
 
-    public boolean gerarSinistro() {
+    public boolean gerarSinistro(Cliente cliente, Veiculo veiculo) {
         /*  Aqui se gera um sinistro de um cliente e um veículo já existentes,
             O endereco será o do cliente e a data será uma string vazia, a ser preenchida
             à medida que obtivermos mais informações.
          */
-        Seguradora novaSeguradora = new Seguradora(nome,telefone,email,endereco);
-        Sinistro novSinistro = new Sinistro("",endereco,novaSeguradora,null,null);
-
         //verificar se cliente existe
         boolean existeCliente = false;
         boolean existeVeiculo = false;
-        
         for (Cliente clienteCadastrado: listaClientes) {
             if (clienteCadastrado.getCPF() == cliente.getCPF()) {
                 existeCliente = true;
@@ -122,13 +118,39 @@ public class Seguradora {
                 existeCliente = true;
             }           
         }
+
         if (existeCliente && existeVeiculo) {
             //gerar sinistro
+            Sinistro sinistro = new Sinistro("01/01/2023","Rua dos Girassois", this, veiculo, cliente);
+            listaSinistros.add(sinistro);
+            return true;
         }
-        return false
+        return false;
         
     }
+    
+    public boolean visualizarSinistro (String cliente) {
+        //encontrar os sinistros com o nome do cliente
+        int numSinistros = 0;
+        
+        for (Sinistro sinistroCadastrado: listaSinistros) {
+            if (sinistroCadastrado.getCliente().getNome() == cliente) {
+                numSinistros++;
+            }           
+        }
+        //informar quantos sinistros tem
+        if (numSinistros >= 1){
+            System.out.println("O cliente" + cliente + "possui" + numSinistros + "sinistros.");
+            return true;    
+        }
+        else {
+            System.out.println("O cliente" + cliente + " não possui sinistros cadastrados");
+            return false;
+        }
+ 
+    }
 
-
-
+    public ArrayList<Sinistro> listarSinistros() {
+        return listaSinistros;  
+    }
 }
