@@ -1,4 +1,4 @@
-import java.util.ArrayList
+import java.util.ArrayList;
 
 public class Seguradora {
     private String nome ;
@@ -153,4 +153,6 @@ public class Seguradora {
     public ArrayList<Sinistro> listarSinistros() {
         return listaSinistros;  
     }
+
+    
 }

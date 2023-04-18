@@ -65,9 +65,10 @@ public class Sinistro {
     }
 
     public String toString() {
-        return  "id:" + id + "\ndata:" + data +
-                "\nendereco:" + endereco + "\nseguradora:" +
-                seguradora + "\nveiculo:"  + veiculo + "\ncliente:"
-                + cliente;
+        return  "id:" + id + "\ndata:" + data + "\nendereco:" + endereco +
+                "\nseguradora:" + seguradora + "\nveiculo:"  + veiculo + 
+                "\ncliente:" + cliente;
+                
+                
     }
 }
