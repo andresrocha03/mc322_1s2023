@@ -1,14 +1,12 @@
 import java.time.LocalDate;
-import java.util.List;
 
 public class ClientePJ extends Cliente{
     private String CNPJ;
     private LocalDate dataFundacao;
 
     //construtor
-    //Ta certo esse construtor ????????????????????
-    public ClientePJ(String nome, String endereco, ArrayList<Veiculo> listaVeiculos, String CNPJ, LocalDate dataFundacao) {
-        super(nome, endereco, listaVeiculos);
+    public ClientePJ(String nome, String endereco, String CNPJ, LocalDate dataFundacao) {
+        super(nome, endereco);
         this.CNPJ = CNPJ;
         this.dataFundacao = dataFundacao;
     }
@@ -118,7 +116,8 @@ public class ClientePJ extends Cliente{
     //precisa chamar o construtor da super ??????????????????????
     public String toString() {
         return 
-            " CNPJ: " + getCNPJ() + 
+            super.toString() +
+            "\nCNPJ: " + getCNPJ() + 
             "\ndataFundacao: " + getDataFundacao() ;
     }
 

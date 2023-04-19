@@ -6,10 +6,10 @@ public class Cliente {
     private ArrayList<Veiculo> listaVeiculos;
 
     // Construtor
-    public Cliente (String nome, String endereco, ArrayList<Veiculo> listaVeiculos) {
+    public Cliente (String nome, String endereco) {
         this.nome              = nome ;
         this.endereco          = endereco ;
-        this.listaVeiculos     = listaVeiculos;
+        this.listaVeiculos     = new ArrayList<Veiculo>();
     }
 
     // Getters e setters
@@ -30,20 +30,43 @@ public class Cliente {
         this.endereco = endereco ;
     }
 
-
-    public ArrayList<Veiculo> getListaVeiculos() {
-        return this.listaVeiculos;
+    public boolean cadastrarVeiculo(Veiculo veiculo) {
+        for (Veiculo veiculoCadastrado: listaVeiculos) {
+            if (veiculoCadastrado == veiculo) {
+                //veiculo cadastrado, é possível removê-lo
+                listaVeiculos.remove(veiculoCadastrado);
+                return true;
+            }           
+        }
+        listaVeiculos.add(veiculo);
+        return true;
     }
 
-    public void setListaVeiculos(ArrayList<Veiculo> listaVeiculos) {
-        this.listaVeiculos = listaVeiculos;
+    public boolean removerVeiculo(Veiculo veiculo) {
+        //verificar se o veiculo esta cadastrado
+        for (Veiculo veiculoCadastrado: listaVeiculos) {
+            if (veiculoCadastrado == veiculo) {
+                //veiculo cadastrado, é possível removê-lo
+                listaVeiculos.remove(veiculoCadastrado);
+                return true;
+            }           
+        }
+        //veiculo não existe, não é possível removê-lo
+        return false;
     }
+
+    public ArrayList<Veiculo> listarVeiculos() {
+        return listaVeiculos;
+    }
+
+
+    
 
     public String toString() {
         return 
             " nome: " + getNome() +
             "\nendereco: " + getEndereco() +
-            "\nlistaVeiculos:" + getListaVeiculos();
+            "\nlistaVeiculos" + listaVeiculos;
     }
 
 

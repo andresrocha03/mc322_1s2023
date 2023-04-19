@@ -56,7 +56,7 @@ public class Seguradora {
     public boolean cadastrarCliente(Cliente cliente) {
         //verificar se o cliente ja esta cadastrado
         for (Cliente clienteCadastrado: listaClientes) {
-            if (clienteCadastrado.getNome() == cliente.getNome()) {
+            if (clienteCadastrado == cliente) {
                 //cliente ja cadastrado
                 return false;
             }           
@@ -66,10 +66,10 @@ public class Seguradora {
         return true;
     }
 
-    public boolean removerCliente(String cliente) {
+    public boolean removerCliente(String nomeCliente) {
         //verificar se o cliente esta cadastrado
         for (Cliente clienteCadastrado: listaClientes) {
-            if (clienteCadastrado.getNome() == cliente) {
+            if (clienteCadastrado.getNome() == nomeCliente) {
                 //cliente cadastrado, é possível removê-lo
                 listaClientes.remove(clienteCadastrado);
                 return true;
@@ -85,6 +85,7 @@ public class Seguradora {
             for (Cliente clienteCadastrado: listaClientes) {
                 if (clienteCadastrado instanceof ClientePF) {
                     listaClientesPF.add(clienteCadastrado);                    
+                    System.out.println("ClientePF cadastrado: " + clienteCadastrado.getNome());
                 }
             }
             return listaClientesPF;
@@ -93,7 +94,8 @@ public class Seguradora {
         ArrayList<Cliente> listaClientesPJ = new ArrayList<Cliente>();
         for (Cliente clienteCadastrado: listaClientes) {
             if (clienteCadastrado instanceof ClientePJ) {
-                listaClientesPJ.add(clienteCadastrado);                    
+                listaClientesPJ.add(clienteCadastrado);            
+                System.out.println("ClientePJ cadastrado: " + clienteCadastrado.getNome());       
             }
         }
         return listaClientesPJ;
@@ -108,16 +110,19 @@ public class Seguradora {
         boolean existeCliente = false;
         boolean existeVeiculo = false;
         for (Cliente clienteCadastrado: listaClientes) {
-            if (clienteCadastrado.getCPF() == cliente.getCPF()) {
-                existeCliente = true;
-            }           
+            if (clienteCadastrado == cliente) {
+                    existeCliente = true;
+            }                          
         }
         //verificar se veiculo exite
-        for (Cliente clienteCadastrado: listaClientes) {
-            if (clienteCadastrado.getCPF() == cliente.getCPF()) {
-                existeCliente = true;
-            }           
+        if (existeCliente) {
+            for (Veiculo veiculoCadastrado: cliente.listarVeiculos()) {
+                if (veiculoCadastrado == veiculo) {
+                    existeVeiculo = true;
+                }           
+            }
         }
+        
 
         if (existeCliente && existeVeiculo) {
             //gerar sinistro

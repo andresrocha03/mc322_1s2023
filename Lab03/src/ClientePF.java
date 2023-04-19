@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class ClientePF {
+public class ClientePF extends Cliente{
     private final String cpf;
     private String genero;
     private LocalDate dataLicenca;
@@ -11,6 +11,16 @@ public class ClientePF {
 
     public String getCpf() {
         return this.cpf;
+    }
+
+    public ClientePF(String nome, String endereco, String cpf, String genero, LocalDate dataLicenca, String educacao, String classeEconomica, String dataNascimento) {
+        super(nome, endereco);
+        this.cpf = cpf;
+        this.genero = genero;
+        this.dataLicenca = dataLicenca;
+        this.educacao = educacao;
+        this.classeEconomica = classeEconomica;
+        this.dataNascimento = dataNascimento;
     }
 
 
@@ -120,16 +130,17 @@ public class ClientePF {
         return true;
     }
      
-    //////////// precisa chama ??????????????????r to string da classe mae
+    
     public String toString() {
         return 
-            " cpf:" + getCpf() +
-            "\ngenero: " + getGenero()  +
-            "\ndataLicenca" + getDataLicenca() +
-            "\neducacao" + getEducacao() + 
-            "\nclasseEconomica" + getClasseEconomica() +
-            "\ndataNascimento" + getDataNascimento();
+            super.toString() +
+            " cpf " + getCpf() +
+            "\ngenero" + getGenero() +
+            "\ndataLicenca='" + getDataLicenca() +
+            "\neducacao='" + getEducacao() +
+            "\nclasseEconomica='" + getClasseEconomica() +
+            "\ndataNascimento='" + getDataNascimento() ;
     }
-
+    
     
 }
