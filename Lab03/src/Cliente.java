@@ -33,12 +33,13 @@ public class Cliente {
     public boolean cadastrarVeiculo(Veiculo veiculo) {
         for (Veiculo veiculoCadastrado: listaVeiculos) {
             if (veiculoCadastrado == veiculo) {
-                //veiculo cadastrado, é possível removê-lo
-                listaVeiculos.remove(veiculoCadastrado);
-                return true;
+                //veiculo já esta cadastrado
+                System.out.println("Veiculo " + veiculo.getPlaca() + " já possui cadastro.");
+                return false;
             }           
         }
         listaVeiculos.add(veiculo);
+        System.out.println("Veiculo cadastrado: " + veiculo.getPlaca());
         return true;
     }
 
@@ -64,8 +65,8 @@ public class Cliente {
 
     public String toString() {
         return 
-            " nome: " + getNome() +
-            "\nendereco: " + getEndereco() +
+            "nome: " + nome +
+            "\nendereco: " + endereco +
             "\nlistaVeiculos" + listaVeiculos;
     }
 

@@ -1,15 +1,14 @@
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import org.omg.Messaging.SyncScopeHelper;
 public class Controle {
     public static void main(String args[]){
         
         
         //criar clientes
-        ClientePF pessoa = new ClientePF("Joao Silva", "Rua Girassol","256.457.630-33",
+        ClientePF pessoa = new ClientePF("Joao", "Rua Girassol","256.457.630-33",
                                         "masculino", LocalDate.of(2015,01,01), "superior completo",
-                                        "classe media","01-01-1995");
+                                        "classe media","01-01-1995");        
         ClientePJ empresa = new ClientePJ("FrangoSA", "Avenida Paulista",  "57.262.176/0001-39",
                                             LocalDate.of(2000,01,01));
         ClientePF marinalva = new ClientePF("Marinalva", "Rua Tulipa","133.560.470-78",
@@ -19,58 +18,76 @@ public class Controle {
         
         //criar seguradora
         Seguradora seguradora = new Seguradora("Seguranca", "996683883", "esperancaseguradora@gmail.com", "Aevenida Faria Lima");
+        
         //cadastrar clientes
         seguradora.cadastrarCliente(pessoa);
         seguradora.cadastrarCliente(empresa);
-        //remover cliente
-        seguradora.removerCliente("Marinalva");
+        seguradora.cadastrarCliente(marinalva);
+        
         //listar clientes
         seguradora.listarClientes("PF");
         seguradora.listarClientes("PJ");
+        System.out.println("----------------------------------------------");
+        
+        //remover cliente
+        seguradora.removerCliente("Marinalva");
+        
+        //listar clientes
+        seguradora.listarClientes("PF");
+        seguradora.listarClientes("PJ");
+        System.out.println("----------------------------------------------");
+        
         //validar CPF/CNPJ
-        if (pessoa.validateCPF(pessoa.getCpf())){
-            System.out.println("O cpf " + pessoa.getCpf() + " é válido");
-        };
-        if (empresa.validateCNPJ(empresa.getCNPJ())){
-            System.out.println("O cpf " + empresa.getCNPJ() + " é válido");
-        };
+        pessoa.validateCPF(pessoa.getCpf());
+        empresa.validateCNPJ(empresa.getCNPJ());
+        System.out.println("----------------------------------------------");
+        
         //adicionar veiculo
         Veiculo veiculoPessoa = new Veiculo("ABC123", "BMW" , "X1", 2020);
         pessoa.cadastrarVeiculo(veiculoPessoa);
         Veiculo veiculoEmpresa = new Veiculo("DEF456", "JAC" , "FUSCA", 2000);
         empresa.cadastrarVeiculo(veiculoEmpresa);
+        System.out.println("----------------------------------------------");
+        
         //gerar sinistro
-        Veiculo veiculoSinistro = pessoa.listarVeiculos().get(0);
-        seguradora.gerarSinistro(pessoa, veiculoSinistro);
+        Veiculo veiculoSinistroPessoa = pessoa.listarVeiculos().get(0);
+        seguradora.gerarSinistro(pessoa, veiculoSinistroPessoa);
+        Veiculo veiculoSinistroEmpresa = empresa.listarVeiculos().get(0);
+        seguradora.gerarSinistro(pessoa, veiculoSinistroEmpresa);
         
         //chamar toString
             //toString ClientePF
-        pessoa.toString();
+            System.out.println(pessoa.toString());
+            System.out.println("----------------------------------------------");
             //toString ClientePJ
-        empresa.toString();
+        System.out.println(empresa.toString());
+        System.out.println("----------------------------------------------");
             //toString de Seguradora
-        seguradora.toString();
+        System.out.println(seguradora.toString());
+        System.out.println("----------------------------------------------");
             //toString de Sinistro
-        seguradora.listarSinistros().get(0).toString();
+        System.out.println(seguradora.listarSinistros().get(0).toString());
+        System.out.println("----------------------------------------------");
             //toString de Veiculo
-        empresa.listarVeiculos().get(0).toString();
+        System.out.println(empresa.listarVeiculos().get(0).toString());
+        System.out.println("----------------------------------------------");
 
         //listarClientes, visualizarSinistro, listarSinistros
         seguradora.listarClientes("PF");
         seguradora.listarClientes("PJ");
+        seguradora.visualizarSinistro(pessoa.getNome());
+        seguradora.visualizarSinistro(empresa.getNome());            
         seguradora.listarSinistros();
         
         //leitura de dados
         Scanner input = new Scanner(System.in);
         System.out.println("Deseja visualizar dados da seguradora? Sim/Nao");
         String comando = input.next();
-        System.out.println(comando); 
         if (comando.equals("Sim")) {
-            System.out.println("Qual dado deseja visualizar? Clientes/Sinistros\n");
+            System.out.println("Qual dado deseja visualizar? Clientes/Sinistros");
             comando = input.next();
             if (comando.equals("Clientes")) {
-                System.out.println("Qual tipo de cliente deseja visualizar? PF/PJ/TODOS\n");
-                input.nextLine();
+                System.out.println("Qual tipo de cliente deseja visualizar? PF/PJ/TODOS");
                 comando = input.next();
                 if (comando.equals("PF")) {
                     seguradora.listarClientes(comando);
@@ -85,13 +102,18 @@ public class Controle {
             
             }
             if (comando.equals("Sinistros")) {
-                input.nextLine();
-                System.out.println("De qual cliente deseja visualizar? Digite o nome\n");
-                    seguradora.visualizarSinistro(input.next());
-            }
+                System.out.println("De qual cliente deseja visualizar? Digite o nome ou TODOS");
+                comando = input.next();    
+                if (comando.equals("TODOS")) {
+                    System.out.println(seguradora.listarSinistros());
+                }
+                else{
+                    seguradora.visualizarSinistro(comando);
+                }
+                }
         }
-        System.out.println("Okay,obrigado!\n");
-        
+        input.close();
+        System.out.println("Okay,obrigado!\n");       
     }
     
 }

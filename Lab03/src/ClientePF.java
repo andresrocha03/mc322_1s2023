@@ -104,6 +104,7 @@ public class ClientePF extends Cliente{
         }
         aux = Character.getNumericValue(cpf.charAt(9));
         if (d1 != aux){
+            System.out.println("O cpf " + cpf + " é inválido");
             return false;
         }
         j=0;
@@ -125,21 +126,24 @@ public class ClientePF extends Cliente{
         }
         aux = Character.getNumericValue(cpf.charAt(10));
         if (d2 != aux) {
+            System.out.println("O cpf " + cpf + " é inválido");
             return false;
         }
+        System.out.println("O cpf " + cpf + " é válido");
         return true;
     }
      
+
     
     public String toString() {
         return 
             super.toString() +
-            " cpf " + getCpf() +
-            "\ngenero" + getGenero() +
-            "\ndataLicenca='" + getDataLicenca() +
-            "\neducacao='" + getEducacao() +
-            "\nclasseEconomica='" + getClasseEconomica() +
-            "\ndataNascimento='" + getDataNascimento() ;
+            "cpf: " + cpf +
+            "\ngenero: " + genero +
+            "\ndataLicenca: '" + dataLicenca +
+            "\neducacao: " + educacao +
+            "\nclasseEconomica: '" + classeEconomica +
+            "\ndataNascimento: " + dataNascimento ;
     }
     
     

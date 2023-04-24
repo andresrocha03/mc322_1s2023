@@ -32,7 +32,8 @@ public class ClientePJ extends Cliente{
         cnpj = cnpj.replaceAll("[^0-9]","");
         
         //verificar se o CNPJ tem 16 digitos
-        if (cnpj.length() != 16) {
+        if (cnpj.length() != 14) {
+            System.out.println("O cnpj " + cnpj + " é inválido");
             return false;
         }
         
@@ -47,10 +48,12 @@ public class ClientePJ extends Cliente{
             }
         }
         if (i==12) {
+            System.out.println("O cnpj " + cnpj + " é inválido");
             return false;
         }
 
         //calcular digitos verificadores
+            //d1
         int soma=0,resto=0;
         int j = 5,aux=5,d1=0;
         for (i=0; i<=3;i++) {
@@ -69,22 +72,21 @@ public class ClientePJ extends Cliente{
             d1 = 0;
         }
         
-    else {
-            d1 = 11 - resto; 
-        }
-        
+        else {
+                d1 = 11 - resto; 
+            }
         aux = Character.getNumericValue(cnpj.charAt(12));
         if (d1 != aux){
+            System.out.println("O cnpj " + cnpj + " é inválido");
             return false;
         }
     
-        
+            //d2
         int d2 = 0;
         j = 6;
         aux=0;
         soma=0;
         resto=0;
-  
         for (i=0; i<=4;i++) {
             aux = Character.getNumericValue(cnpj.charAt(i));
             soma += j*aux;
@@ -101,19 +103,20 @@ public class ClientePJ extends Cliente{
             d2 = 0;
         }
         
-    else {
-            d2 = 11 - resto; 
+        else {
+                d2 = 11 - resto; 
         }
-        
         aux = Character.getNumericValue(cnpj.charAt(13));
         if (d2 != aux){
+            System.out.println("O cnpj " + cnpj + " é inválido");
             return false;
         }
+        System.out.println("O cnpj " + cnpj + " é válido");
         return true;
     }
     
     
-    //precisa chamar o construtor da super ??????????????????????
+    //toString
     public String toString() {
         return 
             super.toString() +

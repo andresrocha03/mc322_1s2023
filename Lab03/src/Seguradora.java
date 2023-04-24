@@ -72,6 +72,12 @@ public class Seguradora {
             if (clienteCadastrado.getNome() == nomeCliente) {
                 //cliente cadastrado, é possível removê-lo
                 listaClientes.remove(clienteCadastrado);
+                //remover sinistros existentes no nome do cliente
+                for (Sinistro sinistroCadastrado:listaSinistros){
+                    if (sinistroCadastrado.getCliente().getNome().equals(nomeCliente)) {
+                            listaSinistros.remove(sinistroCadastrado);
+                    }
+                }
                 return true;
             }           
         }
@@ -80,7 +86,7 @@ public class Seguradora {
     }
 
     public ArrayList<Cliente> listarClientes(String tipoCliente) {
-        if (tipoCliente == "PF"){
+        if (tipoCliente.equals("PF")){
             ArrayList<Cliente> listaClientesPF = new ArrayList<Cliente>();
             for (Cliente clienteCadastrado: listaClientes) {
                 if (clienteCadastrado instanceof ClientePF) {
@@ -92,10 +98,12 @@ public class Seguradora {
         }
         //tipoCliente == "PJ"
         ArrayList<Cliente> listaClientesPJ = new ArrayList<Cliente>();
-        for (Cliente clienteCadastrado: listaClientes) {
-            if (clienteCadastrado instanceof ClientePJ) {
-                listaClientesPJ.add(clienteCadastrado);            
-                System.out.println("ClientePJ cadastrado: " + clienteCadastrado.getNome());       
+        if(tipoCliente.equals("PJ")) {
+            for (Cliente clienteCadastrado: listaClientes) {
+                if (clienteCadastrado instanceof ClientePJ) {
+                    listaClientesPJ.add(clienteCadastrado);            
+                    System.out.println("ClientePJ cadastrado: " + clienteCadastrado.getNome());       
+                }
             }
         }
         return listaClientesPJ;
@@ -117,7 +125,7 @@ public class Seguradora {
         //verificar se veiculo exite
         if (existeCliente) {
             for (Veiculo veiculoCadastrado: cliente.listarVeiculos()) {
-                if (veiculoCadastrado == veiculo) {
+                if ( veiculoCadastrado == veiculo)  {
                     existeVeiculo = true;
                 }           
             }
@@ -134,22 +142,24 @@ public class Seguradora {
         
     }
     
-    public boolean visualizarSinistro (String cliente) {
+    public boolean visualizarSinistro (String nomeCliente) {
         //encontrar os sinistros com o nome do cliente
         int numSinistros = 0;
         
         for (Sinistro sinistroCadastrado: listaSinistros) {
-            if (sinistroCadastrado.getCliente().getNome() == cliente) {
+            if (((sinistroCadastrado.getCliente()).getNome()).equals(nomeCliente)) {
                 numSinistros++;
+                System.out.println(sinistroCadastrado.toString());
             }           
         }
         //informar quantos sinistros tem
         if (numSinistros >= 1){
-            System.out.println("O cliente" + cliente + "possui" + numSinistros + "sinistros.");
+            System.out.println("O cliente " + nomeCliente + " possui " + numSinistros + " sinistros.");
+            
             return true;    
         }
         else {
-            System.out.println("O cliente" + cliente + " não possui sinistros cadastrados");
+            System.out.println("O cliente " + nomeCliente + " não possui sinistros cadastrados");
             return false;
         }
  
@@ -159,5 +169,17 @@ public class Seguradora {
         return listaSinistros;  
     }
 
-    
+
+    /*public String toString() {
+        
+        return 
+            "nome=" + nome +
+            "\ntelefone='" + telefone +
+            "\nemail='" + email+  
+            "\nendereco='" + endereco+  
+            "\nlistaSinistros='" + listaSinistros +  
+            "\nlistaClientes='" + listaClientes
+            ;
+    }
+    */
 }
