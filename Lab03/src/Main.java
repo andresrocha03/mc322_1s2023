@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class Controle {
+public class Main {
     public static void main(String args[]){
         
         
@@ -57,8 +57,8 @@ public class Controle {
         
         //chamar toString
             //toString ClientePF
-            System.out.println(pessoa.toString());
-            System.out.println("----------------------------------------------");
+        System.out.println(pessoa.toString(););    
+        System.out.println("----------------------------------------------");
             //toString ClientePJ
         System.out.println(empresa.toString());
         System.out.println("----------------------------------------------");
@@ -76,7 +76,9 @@ public class Controle {
         seguradora.listarClientes("PF");
         seguradora.listarClientes("PJ");
         seguradora.visualizarSinistro(pessoa.getNome());
+        System.out.println("----------------------------------------------");
         seguradora.visualizarSinistro(empresa.getNome());            
+        System.out.println("----------------------------------------------");
         seguradora.listarSinistros();
         
         //leitura de dados
