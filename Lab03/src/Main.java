@@ -53,28 +53,29 @@ public class Main {
         Veiculo veiculoSinistroPessoa = pessoa.listarVeiculos().get(0);
         seguradora.gerarSinistro(pessoa, veiculoSinistroPessoa);
         Veiculo veiculoSinistroEmpresa = empresa.listarVeiculos().get(0);
-        seguradora.gerarSinistro(pessoa, veiculoSinistroEmpresa);
+        seguradora.gerarSinistro(empresa, veiculoSinistroEmpresa);
         
         //chamar toString
             //toString ClientePF
-        System.out.println(pessoa.toString(););    
+        System.out.println(pessoa);    
         System.out.println("----------------------------------------------");
             //toString ClientePJ
-        System.out.println(empresa.toString());
+        System.out.println(empresa);
         System.out.println("----------------------------------------------");
             //toString de Seguradora
-        System.out.println(seguradora.toString());
+        System.out.println(seguradora);
         System.out.println("----------------------------------------------");
             //toString de Sinistro
-        System.out.println(seguradora.listarSinistros().get(0).toString());
+        System.out.println(seguradora.listarSinistros().get(0));
         System.out.println("----------------------------------------------");
             //toString de Veiculo
-        System.out.println(empresa.listarVeiculos().get(0).toString());
+        System.out.println(empresa.listarVeiculos().get(0));
         System.out.println("----------------------------------------------");
 
         //listarClientes, visualizarSinistro, listarSinistros
         seguradora.listarClientes("PF");
         seguradora.listarClientes("PJ");
+        System.out.println("----------------------------------------------");
         seguradora.visualizarSinistro(pessoa.getNome());
         System.out.println("----------------------------------------------");
         seguradora.visualizarSinistro(empresa.getNome());            

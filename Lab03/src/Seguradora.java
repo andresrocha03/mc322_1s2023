@@ -12,12 +12,12 @@ public class Seguradora {
 
     // Construtor
     public Seguradora ( String nome , String telefone , String email , String endereco ) {
-        this .nome      = nome ;
-        this .telefone  = telefone ;
-        this .email     = email ;
-        this .endereco  = endereco ;
-        this .listaSinistros = new ArrayList<Sinistro>();
-        this .listaClientes = new ArrayList<Cliente>();
+        this.nome      = nome ;
+        this.telefone  = telefone ;
+        this.email     = email ;
+        this.endereco  = endereco ;
+        this.listaSinistros = new ArrayList<Sinistro>();
+        this.listaClientes = new ArrayList<Cliente>();
     }
 
     // Getters e setters
@@ -170,16 +170,13 @@ public class Seguradora {
     }
 
 
-    /*public String toString() {
-        
+    public String toString() { 
         return 
-            "nome=" + nome +
-            "\ntelefone='" + telefone +
-            "\nemail='" + email+  
-            "\nendereco='" + endereco+  
-            "\nlistaSinistros='" + listaSinistros +  
-            "\nlistaClientes='" + listaClientes
-            ;
-    }
-    */
+        "nome: " + nome +
+        "\ntelefone: " + telefone +
+        "\nemail: " + email+  
+        "\nendereco: " + endereco;
+    } 
+            
+    
 }

@@ -12,7 +12,7 @@ public class ClientePF extends Cliente{
     public String getCpf() {
         return this.cpf;
     }
-
+    //construtor
     public ClientePF(String nome, String endereco, String cpf, String genero, LocalDate dataLicenca, String educacao, String classeEconomica, String dataNascimento) {
         super(nome, endereco);
         this.cpf = cpf;
@@ -23,7 +23,7 @@ public class ClientePF extends Cliente{
         this.dataNascimento = dataNascimento;
     }
 
-
+    //getters and setters
     public String getGenero() {
         return this.genero;
     }
