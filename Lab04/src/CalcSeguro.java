@@ -5,13 +5,13 @@ public enum CalcSeguro {
     FATOR_60_90(1.5);
 
     private double valor;
-    /////////pra que serve esse construtor?????
+    
     CalcSeguro(double valor){
         this.valor = valor;
     }
 
-    public double getValor(String constante){
-        return valor;
+    public double getValor(){
+        return this.valor;
     }
 
 

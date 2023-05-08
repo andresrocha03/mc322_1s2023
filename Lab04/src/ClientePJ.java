@@ -29,13 +29,20 @@ public class ClientePJ extends Cliente{
         this.dataFundacao = dataFundacao;
     }
 
-    
-    
+
+    public int getQtdFuncionarios() {
+        return this.qtdFuncionarios;
+    }
+
+    public void setQtdFuncionarios(int qtdFuncionarios) {
+        this.qtdFuncionarios = qtdFuncionarios;
+    }
+
     public double calcularScore(Cliente cliente) {
         //encontrar qtdVeiculos
         int qtdVeiculos = (cliente.listarVeiculos()).size();
         
-        return  VALOR_BASE * (1+ (qtdFuncionarios/100)) * qtdVeiculos;
+        return  CalcSeguro.VALOR_BASE.getValor() * (1+ (qtdFuncionarios/100)) * qtdVeiculos;
     }
     
     //toString
@@ -43,7 +50,9 @@ public class ClientePJ extends Cliente{
         return 
             super.toString() +
             "\nCNPJ: " + getCNPJ() + 
-            "\ndataFundacao: " + getDataFundacao() ;
+            "\ndataFundacao: " + getDataFundacao() 
+
+            "\nqtdFuncionarios: " + getqtdFuncionarios();
     }
 
 }

@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Period;
 
 public class ClientePF extends Cliente{
     private final String cpf;
@@ -6,14 +7,14 @@ public class ClientePF extends Cliente{
     private LocalDate dataLicenca;
     private String educacao;
     private String classeEconomica;
-    private String dataNascimento ;
+    private LocalDate dataNascimento ;
     
 
     public String getCpf() {
         return this.cpf;
     }
     //construtor
-    public ClientePF(String nome, String endereco, String cpf, String genero, LocalDate dataLicenca, String educacao, String classeEconomica, String dataNascimento, double valorSeguro) {
+    public ClientePF(String nome, String endereco, String cpf, String genero, LocalDate dataLicenca, String educacao, String classeEconomica, LocalDate dataNascimento, double valorSeguro) {
         super(nome, endereco, valorSeguro);
         this.cpf = cpf;
         this.genero = genero;
@@ -56,19 +57,30 @@ public class ClientePF extends Cliente{
         this.classeEconomica = classeEconomica;
     }
 
-    public String getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return this.dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
 
     public double calcularScore(Cliente cliente) {
         int qtdVeiculos = (cliente.listarVeiculos()).size();
-        if (cliente.getIdade)
-        return (CalcSeguro.VALOR_BASE * CalcSeguro.FATOR_IDADE * qtdVeiculos);
+        //encontrar idade
+        int idade = (Period.between(this.dataNascimento,LocalDate.now())).getYears();
+        double fatorIdade = 0;
+        if ((18 <= idade) && (idade <=30)) {
+            fatorIdade = CalcSeguro.FATOR_18_30.getValor();
+        }
+        else if ((30<idade) && (idade <= 60)) {
+            fatorIdade = CalcSeguro.FATOR_30_60.getValor();
+        }
+        else {
+            fatorIdade = CalcSeguro.FATOR_60_90.getValor();
+        }
+        return (CalcSeguro.VALOR_BASE.getValor() * fatorIdade * qtdVeiculos);
     }
 
     
