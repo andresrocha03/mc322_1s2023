@@ -4,7 +4,7 @@ public enum CalcSeguro {
     FATOR_30_60(1.0),
     FATOR_60_90(1.5);
 
-    private double valor;
+    private final double valor;
     
     CalcSeguro(double valor){
         this.valor = valor;
