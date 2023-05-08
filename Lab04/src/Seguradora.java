@@ -169,13 +169,20 @@ public class Seguradora {
         return listaSinistros;  
     }
 
-    public double calcularPrecoSeguroCliente(){
-        return calculaScore() * (1 + qtd_sinistros); 
+    public double calcularPrecoSeguroCliente(Cliente cliente){
+        //checar qtdSinistros
+        int qtdSinistros = 0;
+        for (Sinistro sinistro:listaSinistros) {
+            if (cliente == sinistro.getCliente()) {
+                qtdSinistros++;
+            }
+        }
+        return cliente.calcularScore() * (1 + qtdSinistros); 
     }
 
     public double calcularReceita(){
         int receita = 0; 
-        for (cliente:listaClientes) {
+        for (Cliente cliente:listaClientes) {
             receita += calcularPrecoSeguroCliente(cliente);
         }
         return receita; 

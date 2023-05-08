@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-
-public class Cliente {
+//DUVIDA: tem problema fazer essa classe abstrata ??????
+public abstract class Cliente {
     private String nome ;
     private String endereco;
     private ArrayList<Veiculo> listaVeiculos;
@@ -11,7 +11,7 @@ public class Cliente {
         this.nome              = nome ;
         this.endereco          = endereco ;
         this.listaVeiculos     = new ArrayList<Veiculo>();
-        this.valorSeguro       = valorSeguro;
+        this.valorSeguro       = 0;
     }
 
     // Getters e setters
@@ -42,6 +42,8 @@ public class Cliente {
         }
         listaVeiculos.add(veiculo);
         System.out.println("Veiculo cadastrado: " + veiculo.getPlaca());
+        
+        this.valorSeguro = this.calcularScore();
         return true;
     }
 
@@ -51,6 +53,7 @@ public class Cliente {
             if (veiculoCadastrado == veiculo) {
                 //veiculo cadastrado, é possível removê-lo
                 listaVeiculos.remove(veiculoCadastrado);
+                this.valorSeguro = this.calcularScore();
                 return true;
             }           
         }
@@ -62,10 +65,7 @@ public class Cliente {
         return listaVeiculos;
     }
 
-    ///////////// IMPLEMENTAR///
-    public double calculaScore() {
-        return 0;
-    }    
+    public abstract double calcularScore();    
 
     public String toString() {
         return 
