@@ -19,9 +19,9 @@ public class AppMain {
             case GERAR_SINISTRO:
                 gerarSinistro(seguradora);
             case TRANSFERIR_SEGURO:
-                transferirSeguro();
+                transferirSeguro(seguradora);
             case CALC_RECEITA_SEGURADORA:
-                calcReceita();
+                calcReceita(seguradora);
             case SAIR:
                 break;
         }
@@ -156,7 +156,7 @@ public class AppMain {
         input.close();
     }
 
-    public static void calcularReceita(Seguradora seguradora){
+    public static void calcReceita(Seguradora seguradora){
         System.out.println("calculando receita...");
         double receita = seguradora.calcularReceita();
         //printar
