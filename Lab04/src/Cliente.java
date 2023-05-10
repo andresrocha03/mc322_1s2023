@@ -65,7 +65,7 @@ public abstract class Cliente {
         return listaVeiculos;
     }
 
-    public abstract double calcularScore(Cliente cliente);    
+    public abstract double calcularScore();    
 
     public String toString() {
         return 

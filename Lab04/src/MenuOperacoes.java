@@ -7,12 +7,26 @@ public enum MenuOperacoes {
     CALC_RECEITA_SEGURADORA(6),
     SAIR(0);
     
-    public final int operacao;
+    public final int valor;
 
-    MenuOperacoes(int operacao) {
-        this.operacao = operacao;
+    MenuOperacoes(int valor) {
+        this.valor = valor;
     }
-    public int getOperacao() {
-        return this.operacao;
+    public int getValor() {
+        return this.valor;
     }
+
+    public static MenuOperacoes getOperacao(int valor) {
+        MenuOperacoes operacao = null;
+        for (MenuOperacoes operacaoAux:MenuOperacoes.values()) {
+            if (valor == operacaoAux.getValor()) {
+                operacao = operacaoAux;
+                break;
+            }
+        }
+        return operacao;
+    }
+    
+
+
 }

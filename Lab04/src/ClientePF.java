@@ -66,8 +66,8 @@ public class ClientePF extends Cliente{
     }
 
 
-    public double calcularScore(Cliente cliente) {
-        int qtdVeiculos = (cliente.listarVeiculos()).size();
+    public double calcularScore() {
+        int qtdVeiculos = (this.listarVeiculos()).size();
         //encontrar idade
         int idade = (Period.between(this.dataNascimento,LocalDate.now())).getYears();
         double fatorIdade = 0;

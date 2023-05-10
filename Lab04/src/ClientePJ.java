@@ -38,9 +38,9 @@ public class ClientePJ extends Cliente{
         this.qtdFuncionarios = qtdFuncionarios;
     }
 
-    public double calcularScore(Cliente cliente) {
+    public double calcularScore() {
         //encontrar qtdVeiculos
-        int qtdVeiculos = (cliente.listarVeiculos()).size();
+        int qtdVeiculos = (this.listarVeiculos()).size();
         
         return  CalcSeguro.VALOR_BASE.getValor() * (1+ (qtdFuncionarios/100)) * qtdVeiculos;
     }

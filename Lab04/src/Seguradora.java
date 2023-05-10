@@ -111,8 +111,7 @@ public class Seguradora {
 
     public boolean gerarSinistro(Cliente cliente, Veiculo veiculo) {
         /*  Aqui se gera um sinistro de um cliente e um veículo já existentes,
-            O endereco será o do cliente e a data será uma string vazia, a ser preenchida
-            à medida que obtivermos mais informações.
+            O endereco será o do cliente e a data será uma string.
          */
         //verificar se cliente existe
         boolean existeCliente = false;
