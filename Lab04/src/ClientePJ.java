@@ -50,9 +50,9 @@ public class ClientePJ extends Cliente{
         return 
             super.toString() +
             "\nCNPJ: " + getCNPJ() + 
-            "\ndataFundacao: " + getDataFundacao() 
+            "\ndataFundacao: " + getDataFundacao() +
 
-            "\nqtdFuncionarios: " + getqtdFuncionarios();
+            "\nqtdFuncionarios: " + getQtdFuncionarios();
     }
 
 }

@@ -32,6 +32,15 @@ public abstract class Cliente {
         this.endereco = endereco ;
     }
 
+    public double getValorSeguro() {
+        return this.valorSeguro;
+    }
+
+    public void setValorSeguro(double valorSeguro) {
+        this.valorSeguro = valorSeguro;
+    }
+
+
     public boolean cadastrarVeiculo(Veiculo veiculo) {
         for (Veiculo veiculoCadastrado: listaVeiculos) {
             if (veiculoCadastrado == veiculo) {
@@ -65,6 +74,9 @@ public abstract class Cliente {
         return listaVeiculos;
     }
 
+    public void setListaVeiculo(ArrayList<Veiculo> newLista) {
+        this.listaVeiculos = newLista;
+    }
     public abstract double calcularScore();    
 
     public String toString() {

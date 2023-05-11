@@ -69,7 +69,7 @@ public class Seguradora {
     public boolean removerCliente(String nomeCliente) {
         //verificar se o cliente esta cadastrado
         for (Cliente clienteCadastrado: listaClientes) {
-            if (clienteCadastrado.getNome() == nomeCliente) {
+            if (clienteCadastrado.getNome().equals(nomeCliente)) {
                 //cliente cadastrado, é possível removê-lo
                 listaClientes.remove(clienteCadastrado);
                 //remover sinistros existentes no nome do cliente
