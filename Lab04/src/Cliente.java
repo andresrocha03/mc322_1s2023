@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-//DUVIDA: tem problema fazer essa classe abstrata ??????
+
 public abstract class Cliente {
     private String nome ;
     private String endereco;
@@ -77,13 +77,16 @@ public abstract class Cliente {
     public void setListaVeiculo(ArrayList<Veiculo> newLista) {
         this.listaVeiculos = newLista;
     }
+
+    //calcular score sera implementado nas subclasses, de acordo com o tipo do cliente
     public abstract double calcularScore();    
 
     public String toString() {
         return 
             "nome: " + nome +
             "\nendereco: " + endereco +
-            "\nlistaVeiculos" + listaVeiculos;
+            "\nlistaVeiculos" + listaVeiculos +
+            "\nvalorSeguro" + valorSeguro;
     }
 
 

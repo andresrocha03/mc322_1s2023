@@ -157,7 +157,7 @@ public class Validacao {
     }
     
     public static Boolean validateName(String nome){
-        if (nome.matches("[A-Z]*")){
+        if (nome.matches("[A-Z]*") || nome.matches("[a-z]*") ){
             return true;
         }
         return false;

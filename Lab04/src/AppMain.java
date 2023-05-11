@@ -9,7 +9,8 @@ public class AppMain {
         this.operacao = operacao;
     }
 
-    public static void executarOperacao(MenuOperacoes operacao, Seguradora seguradora, ArrayList<Seguradora> listaSeguradoras) {        
+    public static void executarOperacao(MenuOperacoes operacao, Seguradora seguradora, ArrayList<Seguradora> listaSeguradoras) {       
+        //escolher operacao de acordo com a operacao e seguradora solicitadas 
         switch(operacao) {
             case CADASTRAR_CLIENTE:
                 cadastrar(seguradora,listaSeguradoras);
@@ -48,20 +49,23 @@ public class AppMain {
             System.out.println("UTILIZE _ AO INVES DE ESPACOS");
             System.out.println("nome:\n");
             String nome = entrada.next();
-            if (Validacao.validateName(nome)) {
-                while (!Validacao.validateCPF(nome)) {
-                    System.out.println("digite nome valido\n");
-                }
+            //validar cpf
+            if (!Validacao.validateName(nome)) {
+                System.out.println("digite nome valido\n");
             }
-            
+            while (!Validacao.validateName(nome)) {  
+                nome = entrada.next();
+            }
+
             System.out.println("endereco:\n");
             String endereco = entrada.next();
             
             System.out.println("cpf:\n");
             String cpf = entrada.next();
-            if (Validacao.validateCPF(cpf)) {
+            if (!Validacao.validateCPF(cpf)) {
                 while (!Validacao.validateCPF(cpf)) {
                     System.out.println("digite cpf valido\n");
+                    cpf = entrada.next();
                 }
             }
             
@@ -90,17 +94,19 @@ public class AppMain {
             System.out.println("cliente cadastrado!");
         }
         else if (comando == 2) {
+            System.out.println("UTILIZE _ AO INVES DE ESPACOS");
             System.out.println("nome:\n");
             String nome = entrada.next();
             
             System.out.println("endereco:\n");
             String endereco = entrada.next();
-            
+            //validar cnpj
             System.out.println("cnpj:\n");
             String cnpj = entrada.next();
-            if (Validacao.validateCPF(cnpj)) {
-                while (!Validacao.validateCPF(cnpj)) {
+            if (!Validacao.validateCNPJ(cnpj)) {
+                while (!Validacao.validateCNPJ(cnpj)) {
                     System.out.println("digite cnpj valido\n");
+                    cnpj = entrada.next();
                 }
             }
             
@@ -122,7 +128,7 @@ public class AppMain {
     }
 
     public static void cadastrarVeiculo(Seguradora seguradora, Cliente cliente){
-        
+        System.out.println("UTILIZE _ AO INVES DE ESPACOS");
     
         Scanner entrada = new Scanner(System.in);
 
@@ -140,14 +146,14 @@ public class AppMain {
             entrada.nextLine();
             
         cliente.cadastrarVeiculo(new Veiculo(placa,marca,modelo,anoF));
-        System.out.println("veiculo cadastrado!");
-    
-        //entrada.close();            
+        System.out.println("veiculo cadastrado!");            
         
     }
 
     public static Cliente encontrarCliente(String nome, Seguradora seguradora){
+        //funcao que devolve o objeto cliente, sabendo o nome do cliente e em que seguradora este esta
         Cliente cliente=null;
+
         for (Cliente clienteAux: seguradora.listarClientes("todos")) {
             if (clienteAux.getNome().equals(nome)){
                 cliente = clienteAux;
@@ -160,6 +166,7 @@ public class AppMain {
     }
 
     public static void cadastrarSeguradora(ArrayList<Seguradora> lista) {
+        System.out.println("UTILIZE _ AO INVES DE ESPACOS");
         Scanner entrada = new Scanner(System.in);
         System.out.println("Digite o nome da nova seguradora: ");
         String nome = entrada.next();
@@ -171,7 +178,7 @@ public class AppMain {
         String endereco = entrada.nextLine();
 
         Seguradora novaSeguradora = new Seguradora(nome, telefone, email, endereco);
-        //entrada.close();
+        
         lista.add(novaSeguradora);
     }
 
@@ -184,7 +191,6 @@ public class AppMain {
             System.out.println("1:CLIENTE/ 2:VEICULO/ 3:SEGURADORA/ 4:VOLTAR");
             
             comando = input.nextInt();
-            //input.nextLine();
             
             //CADASTRAR CLIENTE
             if (comando == 1) {
@@ -421,7 +427,7 @@ public class AppMain {
         System.out.println("----------------------------------------------");
         seguradora.visualizarSinistro(empresa.getNome());            
         System.out.println("----------------------------------------------");
-        seguradora.listarSinistros();
+        System.out.println(seguradora.listarSinistros());
         System.out.println("----------------------------------------------");
         
         //calcularReceita
