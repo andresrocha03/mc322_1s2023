@@ -7,7 +7,7 @@ public abstract class Cliente {
     private double valorSeguro;
 
     // Construtor
-    public Cliente (String nome, String endereco, double valorSeguro) {
+    public Cliente (String nome, String endereco) {
         this.nome              = nome ;
         this.endereco          = endereco ;
         this.listaVeiculos     = new ArrayList<Veiculo>();
@@ -47,10 +47,10 @@ public abstract class Cliente {
         return true;
     }
 
-    public boolean removerVeiculo(Veiculo veiculo) {
-        //verificar se o veiculo esta cadastrado
+    public boolean removerVeiculo(String placa) {
+        //encontrar veiculo e verificar se o veiculo esta cadastrado
         for (Veiculo veiculoCadastrado: listaVeiculos) {
-            if (veiculoCadastrado == veiculo) {
+            if (veiculoCadastrado.getPlaca().equals(placa)) {
                 //veiculo cadastrado, é possível removê-lo
                 listaVeiculos.remove(veiculoCadastrado);
                 this.valorSeguro = this.calcularScore();

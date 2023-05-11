@@ -14,8 +14,8 @@ public class ClientePF extends Cliente{
         return this.cpf;
     }
     //construtor
-    public ClientePF(String nome, String endereco, String cpf, String genero, LocalDate dataLicenca, String educacao, String classeEconomica, LocalDate dataNascimento, double valorSeguro) {
-        super(nome, endereco, valorSeguro);
+    public ClientePF(String nome, String endereco, String cpf, String genero, LocalDate dataLicenca, String educacao, String classeEconomica, LocalDate dataNascimento) {
+        super(nome, endereco);
         this.cpf = cpf;
         this.genero = genero;
         this.dataLicenca = dataLicenca;

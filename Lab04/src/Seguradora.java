@@ -105,8 +105,10 @@ public class Seguradora {
                     System.out.println("ClientePJ cadastrado: " + clienteCadastrado.getNome());       
                 }
             }
+            return listaClientesPJ;
         }
-        return listaClientesPJ;
+        return this.listaClientes;
+        
     }
 
     public boolean gerarSinistro(Cliente cliente, Veiculo veiculo) {
