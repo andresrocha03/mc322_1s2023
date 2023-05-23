@@ -3,15 +3,15 @@ import java.util.ArrayList;
 public abstract class Cliente {
     private String nome ;
     private String endereco;
-    private ArrayList<Veiculo> listaVeiculos;
-    private double valorSeguro;
+    //private ArrayList<Veiculo> listaVeiculos;
+    //private double valorSeguro;
 
     // Construtor
     public Cliente (String nome, String endereco) {
         this.nome              = nome ;
         this.endereco          = endereco ;
-        this.listaVeiculos     = new ArrayList<Veiculo>();
-        this.valorSeguro       = 0;
+       // this.listaVeiculos     = new ArrayList<Veiculo>();
+        //this.valorSeguro       = 0;
     }
 
     // Getters e setters
@@ -32,7 +32,25 @@ public abstract class Cliente {
         this.endereco = endereco ;
     }
 
-    public double getValorSeguro() {
+    public String toString() {
+        return 
+            "nome: " + nome +
+            "\nendereco: " + endereco +
+            "\nlistaVeiculos" + listaVeiculos +
+            "\nvalorSeguro" + valorSeguro;
+    }
+    
+}
+
+
+
+/* 
+   
+
+    //calcular score sera implementado nas subclasses, de acordo com o tipo do cliente
+    public abstract double calcularScore();    
+
+     public double getValorSeguro() {
         return this.valorSeguro;
     }
 
@@ -40,7 +58,14 @@ public abstract class Cliente {
         this.valorSeguro = valorSeguro;
     }
 
+    
+    public ArrayList<Veiculo> listarVeiculos() {
+        return listaVeiculos;
+    }
 
+    public void setListaVeiculo(ArrayList<Veiculo> newLista) {
+        this.listaVeiculos = newLista;
+   
     public boolean cadastrarVeiculo(Veiculo veiculo) {
         for (Veiculo veiculoCadastrado: listaVeiculos) {
             if (veiculoCadastrado == veiculo) {
@@ -55,7 +80,8 @@ public abstract class Cliente {
         this.valorSeguro = this.calcularScore();
         return true;
     }
-
+    */
+    /*
     public boolean removerVeiculo(String placa) {
         //encontrar veiculo e verificar se o veiculo esta cadastrado
         for (Veiculo veiculoCadastrado: listaVeiculos) {
@@ -69,27 +95,4 @@ public abstract class Cliente {
         //veiculo não existe, não é possível removê-lo
         return false;
     }
-
-    public ArrayList<Veiculo> listarVeiculos() {
-        return listaVeiculos;
-    }
-
-    public void setListaVeiculo(ArrayList<Veiculo> newLista) {
-        this.listaVeiculos = newLista;
-    }
-
-    //calcular score sera implementado nas subclasses, de acordo com o tipo do cliente
-    public abstract double calcularScore();    
-
-    public String toString() {
-        return 
-            "nome: " + nome +
-            "\nendereco: " + endereco +
-            "\nlistaVeiculos" + listaVeiculos +
-            "\nvalorSeguro" + valorSeguro;
-    }
-
-
-    
-    
-}
+     */

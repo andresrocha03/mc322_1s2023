@@ -59,6 +59,7 @@ public class Seguradora {
         this . endereco = endereco ;
     }
 
+    //Metodos cliente
     public boolean cadastrarCliente(Cliente cliente) {
         //verificar se o cliente ja esta cadastrado
         for (Cliente clienteCadastrado: listaClientes) {
@@ -117,7 +118,46 @@ public class Seguradora {
         
     }
 
-    public boolean gerarSinistro(Cliente cliente, Veiculo veiculo) {
+    public ArrayList<Seguro> getSegurosPorCliente(String cpf) {
+
+    }
+
+    public ArrayList<Seguro> getSinistrosPorCliente(String cpf) {
+
+    }
+    
+
+    
+    public boolean visualizarSinistro (String nomeCliente) {
+        //encontrar os sinistros com o nome do cliente
+        int numSinistros = 0;
+        
+        for (Sinistro sinistroCadastrado: listaSinistros) {
+            if (((sinistroCadastrado.getCliente()).getNome()).equals(nomeCliente)) {
+                numSinistros++;
+                System.out.println(sinistroCadastrado.toString());
+            }           
+        }
+        //informar quantos sinistros tem
+        if (numSinistros >= 1){
+            System.out.println("O cliente " + nomeCliente + " possui " + numSinistros + " sinistros.");
+            
+            return true;    
+        }
+        else {
+            System.out.println("O cliente " + nomeCliente + " não possui sinistros cadastrados");
+            return false;
+        }
+ 
+    }
+
+    public ArrayList<Sinistro> listarSinistros() {
+        return listaSinistros;  
+    }
+
+    //Métodos Seguro
+    
+    public boolean gerarSeguro(Cliente cliente, Veiculo veiculo) {
         /*  Aqui se gera um sinistro de um cliente e um veículo já existentes,
             O endereco será o do cliente e a data será uma string.
          */
@@ -149,33 +189,7 @@ public class Seguradora {
         
     }
     
-    public boolean visualizarSinistro (String nomeCliente) {
-        //encontrar os sinistros com o nome do cliente
-        int numSinistros = 0;
-        
-        for (Sinistro sinistroCadastrado: listaSinistros) {
-            if (((sinistroCadastrado.getCliente()).getNome()).equals(nomeCliente)) {
-                numSinistros++;
-                System.out.println(sinistroCadastrado.toString());
-            }           
-        }
-        //informar quantos sinistros tem
-        if (numSinistros >= 1){
-            System.out.println("O cliente " + nomeCliente + " possui " + numSinistros + " sinistros.");
-            
-            return true;    
-        }
-        else {
-            System.out.println("O cliente " + nomeCliente + " não possui sinistros cadastrados");
-            return false;
-        }
- 
-    }
-
-    public ArrayList<Sinistro> listarSinistros() {
-        return listaSinistros;  
-    }
-
+    
     public double calcularPrecoSeguroCliente(Cliente cliente){
         //checar qtdSinistros
         int qtdSinistros = 0;
@@ -195,7 +209,8 @@ public class Seguradora {
         return receita; 
     }
 
-
+    
+    //toString
     public String toString() { 
         return 
         "nome: " + nome +
