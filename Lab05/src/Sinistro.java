@@ -1,15 +1,15 @@
-public class Sinistro {
-    private int id ;
-    private static int IdGenerator = 0;
-    private String data ;
-    private String endereco;
-    private Seguradora seguradora;
-    private Veiculo veiculo;
-    private Cliente cliente;
+import java.time.LocalDate;
 
+public class Sinistro {
+    private int id;
+    private static int IdGenerator = 0;
+    private LocalDate data;
+    private String endereco;
+    private Condutor condutor;
+    private Seguro seguro;
     
     // Construtor
-    public Sinistro (String data , String endereco,Seguradora seguradora,Veiculo veiculo,Cliente cliente ) {
+    public Sinistro (String data, String endereco, Seguradora seguradora,Veiculo veiculo,Cliente cliente ) {
         this .id                = IdGenerator++ ;
         this .data              = data ;
         this .endereco          = endereco ;

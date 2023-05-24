@@ -1,25 +1,28 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ClientePJ extends Cliente{
     private String CNPJ;
     private LocalDate dataFundacao;
-    private int qtdFuncionarios;
+    private ArrayList<Frota> listaFrota;
+ 
 
     //construtor
     public ClientePJ(String nome, String endereco, String CNPJ, LocalDate dataFundacao, int qtdFuncionarios) {
-        super(nome, endereco);
+        super(nome, telefone, endereco, email);
         this.CNPJ = CNPJ;
         this.dataFundacao = dataFundacao;
         this.qtdFuncionarios = qtdFuncionarios;
+        this.listaFrota = new ArrayList<>();
     }
 
+    //getters and setters
     public String getCNPJ() {
         return this.CNPJ;
     }
     public void setCNPJ(String CNPJ) {
         this.CNPJ = CNPJ;
     }
-
 
     public LocalDate getDataFundacao() {
         return this.dataFundacao;
@@ -29,30 +32,42 @@ public class ClientePJ extends Cliente{
         this.dataFundacao = dataFundacao;
     }
 
-
-    public int getQtdFuncionarios() {
-        return this.qtdFuncionarios;
+    public ArrayList<Frota> listarFrota() {
+        return listaFrota;
     }
 
-    public void setQtdFuncionarios(int qtdFuncionarios) {
-        this.qtdFuncionarios = qtdFuncionarios;
+    //metodos Frota
+
+    public boolean cadastrarFrota(){
+
     }
 
-    public double calcularScore() {
-        //encontrar qtdVeiculos
-        int qtdVeiculos = (this.listarVeiculos()).size();
-        
-        return  CalcSeguro.VALOR_BASE.getValor() * (1+ (qtdFuncionarios/100)) * qtdVeiculos;
+    public boolean atualizarFrota(){
+
     }
-    
+
+    public ArrayList<Veiculo> getVeiculosPorFrota(){
+        //retornar lista com veiculos, conforme orientacoes do ped
+    }
+
     //toString
     public String toString() {
         return 
             super.toString() +
             "\nCNPJ: " + getCNPJ() + 
             "\ndataFundacao: " + getDataFundacao() +
-
-            "\nqtdFuncionarios: " + getQtdFuncionarios();
+            "\nlistaFrota: " + listarFrota();
     }
 
 }
+
+/*
+ 
+public double calcularScore() {
+        //encontrar qtdVeiculos
+        int qtdVeiculos = (this.listarVeiculos()).size();
+        
+        return  CalcSeguro.VALOR_BASE.getValor() * (1+ (qtdFuncionarios/100)) * qtdVeiculos;
+    }
+    
+ */

@@ -1,27 +1,26 @@
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 public class ClientePF extends Cliente{
     private final String cpf;
     private String genero;
-    private LocalDate dataLicenca;
     private String educacao;
-    private String classeEconomica;
     private LocalDate dataNascimento ;
-    
+    private ArrayList<Veiculo> listaVeiculos;
 
     public String getCpf() {
         return this.cpf;
     }
+    
     //construtor
-    public ClientePF(String nome, String endereco, String cpf, String genero, LocalDate dataLicenca, String educacao, String classeEconomica, LocalDate dataNascimento) {
-        super(nome, endereco);
+    public ClientePF(String nome, String endereco, String telefone, String email, String cpf, String genero, LocalDate dataLicenca, String educacao, LocalDate dataNascimento) {
+        super(nome, telefone, endereco, email);
         this.cpf = cpf;
         this.genero = genero;
-        this.dataLicenca = dataLicenca;
         this.educacao = educacao;
-        this.classeEconomica = classeEconomica;
         this.dataNascimento = dataNascimento;
+        this.listaVeiculos = new ArrayList<>();
     }
 
     //getters and setters
@@ -31,14 +30,6 @@ public class ClientePF extends Cliente{
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }
-
-    public LocalDate getDataLicenca() {
-        return this.dataLicenca;
-    }
-
-    public void setDataLicenca(LocalDate dataLicenca) {
-        this.dataLicenca = dataLicenca;
     }
 
     public String getEducacao() {
@@ -66,7 +57,61 @@ public class ClientePF extends Cliente{
     }
 
 
-    public double calcularScore() {
+    public void setListaVeiculo(ArrayList<Veiculo> newLista) {
+        this.listaVeiculos = newLista;
+    }
+    
+    //metodos Veiculos 
+    public ArrayList<Veiculo> listarVeiculos() {
+        return listaVeiculos;
+    }
+
+    public boolean cadastrarVeiculo(Veiculo veiculo) {
+        for (Veiculo veiculoCadastrado: listaVeiculos) {
+            if (veiculoCadastrado == veiculo) {
+                //veiculo já esta cadastrado
+                System.out.println("Veiculo " + veiculo.getPlaca() + " já possui cadastro.");
+                return false;
+            }           
+        }
+        listaVeiculos.add(veiculo);
+        System.out.println("Veiculo cadastrado: " + veiculo.getPlaca());
+        
+        this.valorSeguro = this.calcularScore();
+        return true;
+    }
+
+    public boolean removerVeiculo(String placa) {
+        //encontrar veiculo e verificar se o veiculo esta cadastrado
+        for (Veiculo veiculoCadastrado: listaVeiculos) {
+            if (veiculoCadastrado.getPlaca().equals(placa)) {
+                //veiculo cadastrado, é possível removê-lo
+                listaVeiculos.remove(veiculoCadastrado);
+                //this.valorSeguro = this.calcularScore();
+                return true;
+            }           
+        }
+        //veiculo não existe, não é possível removê-lo
+        return false;
+    }
+    
+   
+    
+    public String toString() {
+        return 
+            super.toString() +
+            "cpf: " + cpf +
+            "\ngenero: " + genero +
+            "\neducacao: " + educacao +
+            "\ndataNascimento: " + dataNascimento +
+            "\nlistaVeiculos:" + this.listaVeiculos;
+        }
+    
+    
+}
+
+/*
+  public double calcularScore() {
         int qtdVeiculos = (this.listarVeiculos()).size();
         //encontrar idade
         int idade = (Period.between(this.dataNascimento,LocalDate.now())).getYears();
@@ -83,17 +128,5 @@ public class ClientePF extends Cliente{
         return (CalcSeguro.VALOR_BASE.getValor() * fatorIdade * qtdVeiculos);
     }
 
-    
-    public String toString() {
-        return 
-            super.toString() +
-            "cpf: " + cpf +
-            "\ngenero: " + genero +
-            "\ndataLicenca: '" + dataLicenca +
-            "\neducacao: " + educacao +
-            "\nclasseEconomica: '" + classeEconomica +
-            "\ndataNascimento: " + dataNascimento ;
-    }
-    
-    
-}
+
+ */

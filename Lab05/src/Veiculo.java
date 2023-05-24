@@ -5,9 +5,9 @@ public class Veiculo {
     private int anoFabricacao ;
     // Construtor
     public Veiculo ( String placa , String marca , String modelo, int anoFabricacao) {
-        this .placa     = placa ;
-        this .marca     = marca ;
-        this .modelo    = modelo ;
+        this .placa     = placa;
+        this .marca     = marca;
+        this .modelo    = modelo;
         this .anoFabricacao = anoFabricacao;
         
     }

@@ -1,9 +1,11 @@
+import java.time.LocalDate;
+
 public class SeguroPF extends Seguro {
     private Veiculo veiculo;
     ClientePF cliente;
 
 
-    public SeguroPJ(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora,Veiculo veiculo, ClientePF cliente) {
+    public SeguroPF(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora,Veiculo veiculo, ClientePF cliente) {
         super(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora);
         this.veiculo = veiculo;
         this.cliente = cliente;
