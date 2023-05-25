@@ -8,7 +8,7 @@ public class Condutor {
     private String endereco;
     private String email;
     private LocalDate dataNasc;
-    private ArrayList<Sinistros> listaSinistros;
+    private ArrayList<Sinistro> listaSinistros;
 
 
     public Condutor(String cpf, String nome, String telefone, String endereco, String email, LocalDate dataNasc, ArrayList<Sinistros> listaSinistros) {
@@ -66,17 +66,24 @@ public class Condutor {
         this.dataNasc = dataNasc;
     }
 
-    public ArrayList<Sinistros> getListaSinistros() {
+    public ArrayList<Sinistro> getListaSinistros() {
         return this.listaSinistros;
     }
 
-    public void setListaSinistros(ArrayList<Sinistros> listaSinistros) {
+    public void setListaSinistros(ArrayList<Sinistro> listaSinistros) {
         this.listaSinistros = listaSinistros;
     }
 
     //metodos sinistro
-    public void adicionarSinistro(){
-
+    public boolean adicionarSinistro(Sinistro sinistro){
+        for (Sinistro sinCadastrado: listaSinistros) {
+            if (sinCadastrado.equals(sinistro)) {
+                //sinistro já cadastrado
+                return false;
+            }
+        }
+        listaSinistros.add(sinistro);
+        return true;  
     }
 
     public String toString() {

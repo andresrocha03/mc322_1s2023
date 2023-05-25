@@ -21,11 +21,11 @@ public class SeguroPF extends Seguro {
         this.frota = frota;
     }
 
-    public ClientePJ getCliente() {
+    public ClientePF getCliente() {
         return this.cliente;
     }
 
-    public void setCliente(ClientePJ cliente) {
+    public void setCliente(ClientePF cliente) {
         this.cliente = cliente;
     }
     

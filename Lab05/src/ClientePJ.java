@@ -4,25 +4,27 @@ import java.util.ArrayList;
 public class ClientePJ extends Cliente{
     private String CNPJ;
     private LocalDate dataFundacao;
-    private ArrayList<Frota> listaFrota;
+    private ArrayList<Frota> listaFrotas;
+    
  
 
     //construtor
-    public ClientePJ(String nome, String endereco, String CNPJ, LocalDate dataFundacao, int qtdFuncionarios) {
+    public ClientePJ(String nome, String telefone, String email, String endereco, String CNPJ, LocalDate dataFundacao) {
         super(nome, telefone, endereco, email);
         this.CNPJ = CNPJ;
         this.dataFundacao = dataFundacao;
-        this.qtdFuncionarios = qtdFuncionarios;
-        this.listaFrota = new ArrayList<>();
+        this.listaFrotas = new ArrayList<>();
     }
 
     //getters and setters
     public String getCNPJ() {
         return this.CNPJ;
     }
+    /*
     public void setCNPJ(String CNPJ) {
         this.CNPJ = CNPJ;
     }
+     */
 
     public LocalDate getDataFundacao() {
         return this.dataFundacao;
@@ -32,22 +34,60 @@ public class ClientePJ extends Cliente{
         this.dataFundacao = dataFundacao;
     }
 
-    public ArrayList<Frota> listarFrota() {
+    public ArrayList<Frota> getListaFrotas() {
         return listaFrota;
     }
 
     //metodos Frota
-
-    public boolean cadastrarFrota(){
-
+    public boolean cadastrarFrota(Frota frota){
+        for (Frota frotaCadastrada: listaFrotas) {
+            if (frotaCadastrada.equals(frota)) {
+                //frota já cadastrada
+                return false;
+            }
+        }
+        listaFrotas.add(frota);
+        return true;        
     }
 
-    public boolean atualizarFrota(){
+    public boolean atualizarFrota(Frota frota, Veiculo veiculo){
+    /*  adiciona o veículo na frota, caso ainda não esteja cadastrado. 
+        remove o veículo da frtoa, caso já esteja cadastrado.
+    */
+        for (Frota frotaCadastrada:listaFrotas) {
+            if (frotaCadastrada.equals(frota)) {
+                //frota encontrada
+                for (Veiculo veiculoCadastrado:frotaCadastrada.getListaVeiculo()) {
+                    if (veiculoCadastrado.equals(veiculo)) {
+                        //veiculo encontrado, é possível remover
+                        (frotaCadastrada.getListaVeiculo()).remove(veiculo);
+                        return true;
+                    }
 
+                }
+            }
+        }
+    return false;
     }
 
-    public ArrayList<Veiculo> getVeiculosPorFrota(){
-        //retornar lista com veiculos, conforme orientacoes do ped
+    public boolean atualizarFrota(Frota frota){
+    //remover frota inteira
+    for (Frota frotaCadastrada: listaFrotas) {
+        if (frotaCadastrada.equals(frota)) {
+            //frota já cadastrada,é possível remover
+            listaFrotas.remove(frota);
+            return true;
+            
+        }
+    }
+    //
+    return false;
+    }
+
+
+    public ArrayList<Veiculo> getVeiculosPorFrota(Frota frota){
+        //retornar lista com veiculos
+        return frota.getListaVeiculo();
     }
 
     //toString
@@ -56,10 +96,11 @@ public class ClientePJ extends Cliente{
             super.toString() +
             "\nCNPJ: " + getCNPJ() + 
             "\ndataFundacao: " + getDataFundacao() +
-            "\nlistaFrota: " + listarFrota();
+            "\nlistaFrota: " + getListaFrotas();
     }
 
 }
+
 
 /*
  

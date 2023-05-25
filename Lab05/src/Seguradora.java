@@ -60,15 +60,7 @@ public class Seguradora {
         this . endereco = endereco ;
     }
 
-    public ArrayList<Seguro> getSegurosPorCliente(String cpf) {
-
-    }
-
-    public ArrayList<Seguro> getSinistrosPorCliente(String cpf) {
-
-    }
-
-    public ArrayList<Cliente> listarClientes(String tipoCliente) {
+    public ArrayList<Cliente> getListaClientes(String tipoCliente) {
         if (tipoCliente.equals("PF")){
             ArrayList<Cliente> listaClientesPF = new ArrayList<Cliente>();
             for (Cliente clienteCadastrado: listaClientes) {
@@ -92,12 +84,46 @@ public class Seguradora {
         return this.listaClientes;  
     }
 
+    //metodos cliente
+    public ArrayList<Seguro> getSegurosPorCliente(Cliente cliente) {
+        //encontrar os seguros com o nome do cliente
+        int numSeguros = 0;
+        ArrayList<Seguro> listaSegCLiente = new ArrayList<>();
+        for (Seguro seguroCadastrado: listaSeguros) {
+            if (seguroCadastrado.getCliente().equals(cliente)) {
+                numSeguros++;
+                listaSegCLiente.add(seguroCadastrado);
+                
+            }           
+        }
+        //informar quantos seguros tem
+        System.out.println("O cliente " + cliente.getNome() + " possui " + numSeguros + " seguros.");
+        return listaSegCLiente;
+    }
 
-    //Metodos cliente
+    public ArrayList<Sinistro> getSinistrosPorCliente(Cliente cliente) {
+        //encontrar os sinistros com o nome do cliente
+        int numSinistros = 0;
+        ArrayList<Sinistro> listaSinistros = new ArrayList<>();
+        for (Seguro segCadastrado: listaSeguros) {
+            for (Sinistro sinCadastrado: segCadastrado.listarSinistros()) { 
+                if (sinCadastrado.getCliente().equals(cliente)) {
+                    numSinistros++;
+                    listaSinistros.add(sinCadastrado);
+                    
+                } 
+            }
+                       
+        }
+        //informar quantos sinistros tem
+        System.out.println("O cliente " + cliente.getNome() + " possui " + numSinistros + " sinistros.");
+        return listaSinistros;
+    }
+
     public boolean cadastrarCliente(Cliente cliente) {
         //verificar se o cliente ja esta cadastrado
         for (Cliente clienteCadastrado: listaClientes) {
-            if (clienteCadastrado == cliente) {
+            if (clienteCadastrado.equals(cliente)) {
                 //cliente ja cadastrado
                 return false;
             }           
@@ -107,13 +133,19 @@ public class Seguradora {
         return true;
     }
 
-    public boolean removerCliente(String nomeCliente) {
+    public boolean removerCliente(Cliente cliente) {
         //verificar se o cliente esta cadastrado
         for (Cliente clienteCadastrado: listaClientes) {
-            if (clienteCadastrado.getNome().equals(nomeCliente)) {
+            if (clienteCadastrado.equals(cliente)) {
                 //cliente cadastrado, é possível removê-lo
                 listaClientes.remove(clienteCadastrado);
+                //remover sinistros existentes no nome do cliente
+                for (Seguro segCadastrado: listaSeguros) {
+                    if (segCadastrado.getCliente().equals(cliente)) {
+                        listaSeguros.remove(segCadastrado);
+                    }
                 return true;
+                }
             }           
         }
         //cliente não existe, não é possível removê-lo
@@ -122,42 +154,85 @@ public class Seguradora {
 
    
     //Métodos Seguro
-    
     public boolean gerarSeguro(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
         /*  
         Aqui se gera um seguro
          */
-        //verificar existencia de cliente e veiculo?????????
+        boolean verificacao = false;
+         //verificar existencia de cliente e veiculo
+        for (Cliente clienteCadastrado: listaClientes) {
+            if (clienteCadastrado.equals(cliente)) {
+                //cliente cadastrado, é possível gerar seguro
+                if (cliente instanceof ClientePF) {
+                    for (Veiculo veiculoCadastrado: ((ClientePF)cliente).listarVeiculos()) {
+                        if (veiculoCadastrado.equals(veiculo)) {
+                            //veiculo cadastrado, é possível gerar seguro
+                            verificacao = true;
+                        }
+                    }
+        
+                }   
+                if (cliente instanceof ClientePJ){
+                    for (Frota frota: ((ClientePJ)cliente).getListaFrota()) {
+                        for (Veiculo veiculoCadastrado: frota.getListaVeiculo()) {
+                            if (veiculoCadastrado.equals(veiculo)) {
+                                //veiculo cadastrado, é possível gerar seguro
+                                verificacao = true;
+                            }
+                        }    
+                        
+                    }
+        
+                }      
+            }
+        }
 
         //seguroPF
-        if (tipo.equals("PF")) {
+        if (cliente instanceof ClientePF || verificacao) {
             Seguro seguro = new SeguroPF(dataInicio, dataFim, seguradora, veiculo, (ClientePF)cliente);
             listaSeguros.add(seguro);
             return true;
         }
         //seguroPJ
-        Seguro seguro = new SeguroPJ(dataInicio, dataFim, seguradora, veiculo, (ClientePJ)cliente);
-        listaSeguros.add(seguro);
-        return true;
+        if (cliente instanceof ClientePJ || verificacao) {
+            Seguro seguro = new SeguroPJ(dataInicio, dataFim, seguradora, (ClientePJ)cliente);
+            listaSeguros.add(seguro);
+            return true;
+        }
+        return false;
         
     }
     
     public boolean cadastrarSeguro(Seguro seguro){
-        //seguro ja esta adicionado ???
+        //verificar se o seguro ja esta cadastrado
+        for (Seguro seguroCadastrado: listaSeguros) {
+            if (seguroCadastrado.equals(seguro)) {
+                //seguro ja cadastrado
+                return false;
+            }           
+        }
+        //seguro novo
         listaSeguros.add(seguro);
         return true;
     }
 
     public boolean cancelarSeguro(Seguro seguro){
-        //esse Seguro existe ???
-        listaSeguros.remove(seguro);
-        return true;
+        //verificar se o seguro esta cadastrado
+        for (Seguro seguroCadastrado: listaSeguros) {
+            if (seguroCadastrado.equals(seguro)) {
+                //seguro cadastrado, é possível removê-lo
+                listaSeguros.remove(seguroCadastrado);
+                return true;
+            }        
+        }
+        //seguro não existe, não é possível removê-lo
+        return false;
     }
 
     public double calcularReceita(){
-        int receita = 0; 
-        for (Cliente cliente:listaClientes) {
-            receita += calcularPrecoSeguroCliente(cliente);
+        double receita = 0; 
+        for (Seguro seguro:listaSeguros) {
+            receita += seguro.calcularValor();
         }
         return receita; 
     }
@@ -174,42 +249,3 @@ public class Seguradora {
     
 }
 
-
-/*
-    public boolean visualizarSinistro (String nomeCliente) {
-        //encontrar os sinistros com o nome do cliente
-        int numSinistros = 0;
-        
-        for (Sinistro sinistroCadastrado: listaSinistros) {
-            if (((sinistroCadastrado.getCliente()).getNome()).equals(nomeCliente)) {
-                numSinistros++;
-                System.out.println(sinistroCadastrado.toString());
-            }           
-        }
-        //informar quantos sinistros tem
-        if (numSinistros >= 1){
-            System.out.println("O cliente " + nomeCliente + " possui " + numSinistros + " sinistros.");
-            
-            return true;    
-        }
-        else {
-            System.out.println("O cliente " + nomeCliente + " não possui sinistros cadastrados");
-            return false;
-        }
- 
-    }
-    
-    
-    public double calcularPrecoSeguroCliente(Cliente cliente){
-        //checar qtdSinistros
-        int qtdSinistros = 0;
-        for (Sinistro sinistro:listaSinistros) {
-            if (cliente == sinistro.getCliente()) {
-                qtdSinistros++;
-            }
-        }
-        return cliente.calcularScore() * (1 + qtdSinistros); 
-    }
- 
- 
-    */

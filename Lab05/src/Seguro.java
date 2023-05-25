@@ -57,6 +57,8 @@ public abstract class Seguro {
         return this.listaSinistros;
     }
 
+    public abstract Cliente getCliente();
+
     //listar
     public ArrayList<Sinistro> listarSinistros() {
         return listaSinistros;
@@ -78,7 +80,7 @@ public abstract class Seguro {
     public abstract boolean desautorizarCondutor();
     public abstract boolean autorizarCondutor();
 
-    }
+    
 
     //Metodos valor
     public abstract int calcularValor();

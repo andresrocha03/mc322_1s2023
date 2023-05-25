@@ -8,14 +8,13 @@ public class Sinistro {
     private Condutor condutor;
     private Seguro seguro;
     
+    
     // Construtor
-    public Sinistro (String data, String endereco, Seguradora seguradora,Veiculo veiculo,Cliente cliente ) {
+    public Sinistro (LocalDate data, String endereco, Seguro seguro) {
         this .id                = IdGenerator++ ;
         this .data              = data ;
         this .endereco          = endereco ;
-        this .seguradora        = seguradora;
-        this .veiculo           = veiculo;
-        this .cliente           = cliente;
+        this .seguro            = seguro;
     }
 
     // Getters e setters
@@ -27,11 +26,11 @@ public class Sinistro {
         this .id = id ;
     }
 
-    public String getData () {
+    public LocalDate getData () {
         return data ;
     }
 
-    public void setData ( String data) {
+    public void setData (LocalDate data) {
         this . data = data ;
     }
 
@@ -43,29 +42,16 @@ public class Sinistro {
         this . endereco = endereco ;
     }
 
-    public Seguradora getSeguradora() {
-        return seguradora;
+    public Seguro getSeguro() {
+        return seguro;
     }
-    public void setSeguradora(Seguradora seguradora) {
-        this.seguradora = seguradora;
+    public void setSeguro(Seguro seguro) {
+        this.seguro = seguro;
     }
-    public Veiculo getVeiculo() {
-        return veiculo;
-    }
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
-    }
-    public Cliente getCliente() {
-        return cliente;
-    }
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
+    
     public String toString() {
         return  "id:" + id + "\ndata:" + data + "\nendereco:" + endereco +
-                "\nseguradora:" + seguradora + "\nveiculo:"  + veiculo + 
-                "\ncliente:" + cliente;
+                "\nseguro:" + seguro ;
                 
                 
     }

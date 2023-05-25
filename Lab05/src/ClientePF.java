@@ -8,10 +8,8 @@ public class ClientePF extends Cliente{
     private String educacao;
     private LocalDate dataNascimento ;
     private ArrayList<Veiculo> listaVeiculos;
-
-    public String getCpf() {
-        return this.cpf;
-    }
+    
+    
     
     //construtor
     public ClientePF(String nome, String endereco, String telefone, String email, String cpf, String genero, LocalDate dataLicenca, String educacao, LocalDate dataNascimento) {
@@ -24,6 +22,10 @@ public class ClientePF extends Cliente{
     }
 
     //getters and setters
+    public String getCpf() {
+        return this.cpf;
+    }
+
     public String getGenero() {
         return this.genero;
     }
@@ -40,14 +42,6 @@ public class ClientePF extends Cliente{
         this.educacao = educacao;
     }
 
-    public String getClasseEconomica() {
-        return this.classeEconomica;
-    }
-
-    public void setClasseEconomica(String classeEconomica) {
-        this.classeEconomica = classeEconomica;
-    }
-
     public LocalDate getDataNascimento() {
         return this.dataNascimento;
     }
@@ -56,16 +50,15 @@ public class ClientePF extends Cliente{
         this.dataNascimento = dataNascimento;
     }
 
+    public ArrayList<Veiculo> getListaVeiculos() {
+        return listaVeiculos;
+    }
 
     public void setListaVeiculo(ArrayList<Veiculo> newLista) {
         this.listaVeiculos = newLista;
     }
     
     //metodos Veiculos 
-    public ArrayList<Veiculo> listarVeiculos() {
-        return listaVeiculos;
-    }
-
     public boolean cadastrarVeiculo(Veiculo veiculo) {
         for (Veiculo veiculoCadastrado: listaVeiculos) {
             if (veiculoCadastrado == veiculo) {
@@ -76,8 +69,6 @@ public class ClientePF extends Cliente{
         }
         listaVeiculos.add(veiculo);
         System.out.println("Veiculo cadastrado: " + veiculo.getPlaca());
-        
-        this.valorSeguro = this.calcularScore();
         return true;
     }
 
@@ -91,7 +82,8 @@ public class ClientePF extends Cliente{
                 return true;
             }           
         }
-        //veiculo não existe, não é possível removê-lo
+        //veiculo não foi cadastrado, não é possível removê-lo
+        System.out.println("Veiculo " + placa + " não possui cadastro.");
         return false;
     }
     

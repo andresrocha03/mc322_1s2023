@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-
-public abstract class Cliente {
+public class Cliente {
     private String nome ;
     private String telefone;
     private String endereco;
@@ -58,19 +56,3 @@ public abstract class Cliente {
 }
 
 
-
-/* 
-   
-
-    //calcular score sera implementado nas subclasses, de acordo com o tipo do cliente
-    public abstract double calcularScore();    
-
-     public double getValorSeguro() {
-        return this.valorSeguro;
-    }
-
-    public void setValorSeguro(double valorSeguro) {
-        this.valorSeguro = valorSeguro;
-    }
-
-   

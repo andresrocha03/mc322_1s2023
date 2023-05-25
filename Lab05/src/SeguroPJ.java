@@ -1,22 +1,25 @@
+import java.util.ArrayList;
+import java.time.LocalDate;
+
 public class SeguroPJ extends Seguro {
-    private Frota frota;
+    private ArrayList<Frota> listaFrota;
     ClientePJ cliente;
 
 
-    public SeguroPJ(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora,Frota frota, ClientePJ cliente) {
-        super(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora);
-        this.frota = frota;
+    public SeguroPJ(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora, ClientePJ cliente) {
+        super(dataInicio,dataFim,seguradora);
+        this.listaFrota = new ArrayList<>();
         this.cliente = cliente;
     }
 
     //getters and setters
 
-    public Frota getFrota() {
-        return this.frota;
+    public Frota getlistaFrota() {
+        return this.listaFrota;
     }
 
-    public void setFrota(Frota frota) {
-        this.frota = frota;
+    public void setFrota(ArrayList<Frota> novaListaFrota) {
+        this.listaFrota = novaListaFrota;
     }
 
     public ClientePJ getCliente() {
