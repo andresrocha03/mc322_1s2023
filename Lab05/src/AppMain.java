@@ -8,7 +8,7 @@ public class AppMain {
     public AppMain(MenuOperacoes operacao) {
         this.operacao = operacao;
     }
-
+    ///// ARRUMAR AS TOSTRING //////////////////////////////
     public static void executarOperacao(MenuOperacoes operacao, Seguradora seguradora, ArrayList<Seguradora> listaSeguradoras) {       
         //escolher operacao de acordo com a operacao e seguradora solicitadas 
         switch(operacao) {
@@ -472,6 +472,8 @@ public class AppMain {
         
 
     }
+    ///// ARRUMAR AS TOSTRING //////////////////////////////
+   
 }
 
 
