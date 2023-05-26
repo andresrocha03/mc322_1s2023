@@ -106,8 +106,8 @@ public class Seguradora {
         int numSinistros = 0;
         ArrayList<Sinistro> listaSinistros = new ArrayList<>();
         for (Seguro segCadastrado: listaSeguros) {
-            for (Sinistro sinCadastrado: segCadastrado.listarSinistros()) { 
-                if (sinCadastrado.getCliente().equals(cliente)) {
+            if (segCadastrado.getCliente().equals(cliente)) {
+                for (Sinistro sinCadastrado: segCadastrado.getListaSinistros()) { 
                     numSinistros++;
                     listaSinistros.add(sinCadastrado);
                     
@@ -164,7 +164,7 @@ public class Seguradora {
             if (clienteCadastrado.equals(cliente)) {
                 //cliente cadastrado, é possível gerar seguro
                 if (cliente instanceof ClientePF) {
-                    for (Veiculo veiculoCadastrado: ((ClientePF)cliente).listarVeiculos()) {
+                    for (Veiculo veiculoCadastrado: ((ClientePF)cliente).getListaVeiculos()) {
                         if (veiculoCadastrado.equals(veiculo)) {
                             //veiculo cadastrado, é possível gerar seguro
                             verificacao = true;
@@ -173,7 +173,7 @@ public class Seguradora {
         
                 }   
                 if (cliente instanceof ClientePJ){
-                    for (Frota frota: ((ClientePJ)cliente).getListaFrota()) {
+                    for (Frota frota: ((ClientePJ)cliente).getListaFrotas()) {
                         for (Veiculo veiculoCadastrado: frota.getListaVeiculo()) {
                             if (veiculoCadastrado.equals(veiculo)) {
                                 //veiculo cadastrado, é possível gerar seguro
@@ -232,7 +232,7 @@ public class Seguradora {
     public double calcularReceita(){
         double receita = 0; 
         for (Seguro seguro:listaSeguros) {
-            receita += seguro.calcularValor();
+            receita += seguro.getValorMensal();
         }
         return receita; 
     }

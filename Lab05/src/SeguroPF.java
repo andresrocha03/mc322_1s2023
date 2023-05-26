@@ -1,24 +1,26 @@
 import java.time.LocalDate;
+import java.time.Period;
 
 public class SeguroPF extends Seguro {
     private Veiculo veiculo;
-    ClientePF cliente;
+    private ClientePF cliente;
 
 
     public SeguroPF(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora,Veiculo veiculo, ClientePF cliente) {
-        super(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora);
+        super(dataInicio,dataFim,seguradora);
         this.veiculo = veiculo;
         this.cliente = cliente;
+        super.setValorMensal(calcularValor());
     }
 
     //getters and setters
 
-    public Frota getFrota() {
-        return this.frota;
+    public Veiculo getVeiculo() {
+        return this.veiculo;
     }
 
-    public void setFrota(Frota frota) {
-        this.frota = frota;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     public ClientePF getCliente() {
@@ -29,49 +31,45 @@ public class SeguroPF extends Seguro {
         this.cliente = cliente;
     }
     
-    //metodos condutor
-    public boolean autorizarCondutor() {
-
-    }
-    public boolean desautorizarCondutor() {
-
-    }
-
-    //Metodos Sinistros
-    public boolean gerarSinistro(Cliente cliente, Veiculo veiculo) {
-        /*  Aqui se gera um sinistro de um cliente e um veículo já existentes,
-            O endereco será o do cliente e a data será uma string.
-         */
-        //verificar se cliente existe
-        boolean existeCliente = false;
-        boolean existeVeiculo = false;
-        for (Cliente clienteCadastrado: listaClientes) {
-            if (clienteCadastrado == cliente) {
-                    existeCliente = true;
-            }                          
-        }
-        //verificar se veiculo exite
-        if (existeCliente) {
-            for (Veiculo veiculoCadastrado: cliente.listarVeiculos()) {
-                if ( veiculoCadastrado == veiculo)  {
-                    existeVeiculo = true;
-                }           
-            }
-        }
-        
-
-        if (existeCliente && existeVeiculo) {
-            //gerar sinistro
-            Sinistro sinistro = new Sinistro("01/01/2023","Rua dos Girassois", this, veiculo, cliente);
-            listaSinistros.add(sinistro);
-            return true;
-        }
-        return false;
-    }
 
     //metodo valor
-    public int calcularValor(){
-
+    public double calcularValor(){
+        //encontrar qtdVeiculos
+        int qtdVeiculos = (cliente.getListaVeiculos()).size();
+        //encontrar idade
+        int idade = (Period.between(cliente.getDataNascimento(),LocalDate.now())).getYears();
+        //encontrar qtdSinistros/cliente
+        int qtdSinistrosCli = getSeguradora().getSinistrosPorCliente(cliente).size();
+        //encontrar qtdSinistros/condutor
+        int qtdSinistrosCon = 0;
+        for (Condutor condutor:super.getListaCondutores()) {
+            qtdSinistrosCon += condutor.getListaSinistros().size();
+        }
+        //encontrar fatorIdade
+        double fatorIdade = 0;
+        if ((18 <= idade) && (idade <=30)) {
+            fatorIdade = CalcSeguro.FATOR_18_30.getValor();
+        }
+        else if ((30<idade) && (idade <= 60)) {
+            fatorIdade = CalcSeguro.FATOR_30_60.getValor();
+        }
+        else {
+            fatorIdade = CalcSeguro.FATOR_60_90.getValor();
+        }
+        //
+        return  (CalcSeguro.VALOR_BASE.getValor() * fatorIdade * (1+ (1/qtdVeiculos)) *
+                (2 + (qtdSinistrosCli/10)) * (5 + (qtdSinistrosCon/10))   
+                );
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " veiculo='" + getVeiculo() + "'" +
+            ", cliente='" + getCliente() + "'" +
+            "}";
+    }
+
 
 }

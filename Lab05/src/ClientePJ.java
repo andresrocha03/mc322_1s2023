@@ -5,27 +5,25 @@ public class ClientePJ extends Cliente{
     private String CNPJ;
     private LocalDate dataFundacao;
     private ArrayList<Frota> listaFrotas;
-    
+    private int qtdFuncionarios;
  
 
     //construtor
-    public ClientePJ(String nome, String telefone, String email, String endereco, String CNPJ, LocalDate dataFundacao) {
+    public ClientePJ(String nome, String telefone, String email, 
+                     String endereco, String CNPJ, LocalDate dataFundacao,
+                     int qtdFuncionarios) {
         super(nome, telefone, endereco, email);
         this.CNPJ = CNPJ;
         this.dataFundacao = dataFundacao;
         this.listaFrotas = new ArrayList<>();
+        this.qtdFuncionarios = qtdFuncionarios;
     }
 
     //getters and setters
     public String getCNPJ() {
         return this.CNPJ;
     }
-    /*
-    public void setCNPJ(String CNPJ) {
-        this.CNPJ = CNPJ;
-    }
-     */
-
+ 
     public LocalDate getDataFundacao() {
         return this.dataFundacao;
     }
@@ -35,9 +33,18 @@ public class ClientePJ extends Cliente{
     }
 
     public ArrayList<Frota> getListaFrotas() {
-        return listaFrota;
+        return listaFrotas;
     }
 
+    public int getQtdFuncionarios() {
+        return this.qtdFuncionarios;
+    }
+
+    public void setQtdFuncionarios(int novaQtd) {
+        this.qtdFuncionarios = novaQtd;
+    }
+    
+    
     //metodos Frota
     public boolean cadastrarFrota(Frota frota){
         for (Frota frotaCadastrada: listaFrotas) {
@@ -90,6 +97,8 @@ public class ClientePJ extends Cliente{
         return frota.getListaVeiculo();
     }
 
+
+    
     //toString
     public String toString() {
         return 

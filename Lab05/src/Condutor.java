@@ -9,9 +9,10 @@ public class Condutor {
     private String email;
     private LocalDate dataNasc;
     private ArrayList<Sinistro> listaSinistros;
+    private boolean autorizacao;
 
 
-    public Condutor(String cpf, String nome, String telefone, String endereco, String email, LocalDate dataNasc, ArrayList<Sinistros> listaSinistros) {
+    public Condutor(String cpf, String nome, String telefone, String endereco, String email, LocalDate dataNasc, ArrayList<Sinistro> listaSinistros) {
         this.cpf = cpf;
         this.nome = nome;
         this.telefone = telefone;
@@ -72,6 +73,14 @@ public class Condutor {
 
     public void setListaSinistros(ArrayList<Sinistro> listaSinistros) {
         this.listaSinistros = listaSinistros;
+    }
+
+    public boolean getAutorizacao(){
+        return this.autorizacao;
+    }
+
+    public void setAutorizacao(boolean valor){
+        this.autorizacao = valor;
     }
 
     //metodos sinistro

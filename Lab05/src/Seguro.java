@@ -9,7 +9,7 @@ public abstract class Seguro {
     private Seguradora seguradora;
     private ArrayList<Sinistro> listaSinistros;
     private ArrayList<Condutor> listaCondutores;
-    private int valorMensal;
+    private double valorMensal;
 
     
     public Seguro(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora) {
@@ -57,36 +57,64 @@ public abstract class Seguro {
         return this.listaSinistros;
     }
 
-    public abstract Cliente getCliente();
-
-    //listar
-    public ArrayList<Sinistro> listarSinistros() {
-        return listaSinistros;
+    public void setListaSinistros(ArrayList<Sinistro> novaListaSinistros) {
+        this.listaSinistros = novaListaSinistros;
     }
 
-    public ArrayList<Condutor> listarCondutores() {
+    public abstract Cliente getCliente();
+
+
+    public ArrayList<Condutor> getListaCondutores() {
         return listaCondutores;
     }
 
-    public int getValorMensal() {
+    public double getValorMensal() {
         return this.valorMensal;
     }
 
-    public void setValorMensal(int valorMensal) {
+    public void setValorMensal(Double valorMensal) {
         this.valorMensal = valorMensal;
     }
 
     //metodos Condutor
-    public abstract boolean desautorizarCondutor();
-    public abstract boolean autorizarCondutor();
-
+    public boolean autorizarCondutor(Condutor condutor){
+        //encontrar condutor
+        for (Condutor condutorCadastrado: listaCondutores) {
+            if (condutorCadastrado.equals(condutor)) {
+                condutorCadastrado.setAutorizacao(true); 
+                return true;
+            }
+        }
+        //condutor nao encontrado
+        return false;
+    }
     
+    public boolean desautorizarCondutor(Condutor condutor) {
+        //encontrar condutor
+        for (Condutor condutorCadastrado: listaCondutores) {
+            if (condutorCadastrado.equals(condutor)) {
+                condutorCadastrado.setAutorizacao(false); 
+                return true;
+            }
+        }
+        //condutor nao encontrado
+        return false;
+    };
 
     //Metodos valor
-    public abstract int calcularValor();
+    public abstract double calcularValor();
     
-    //Metodos Sinistro
-    public abstract boolean gerarSinistro(Cliente cliente, Veiculo veiculo);
-    
+    //Metodos Sinistros
+    public boolean gerarSinistro(LocalDate data, String endereco, Condutor condutor) {
+        /*  Aqui se gera um sinistro do cliente do seguro,
+            O endereco será uma string e a data será LocalDate.
+         */
+        //gerar sinistro
+        Sinistro sinistro = new Sinistro(data, endereco, this, condutor);
+        ArrayList<Sinistro> novaListaSinistros = getListaSinistros();
+        novaListaSinistros.add(sinistro);
+        setListaSinistros(novaListaSinistros); 
+        return true;
+    }
     
 }

@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.time.Period;
 
 public class SeguroPJ extends Seguro {
     private ArrayList<Frota> listaFrota;
-    ClientePJ cliente;
+    private ClientePJ cliente;
 
 
     public SeguroPJ(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora, ClientePJ cliente) {
@@ -14,7 +15,7 @@ public class SeguroPJ extends Seguro {
 
     //getters and setters
 
-    public Frota getlistaFrota() {
+    public ArrayList<Frota> getlistaFrota() {
         return this.listaFrota;
     }
 
@@ -29,48 +30,29 @@ public class SeguroPJ extends Seguro {
     public void setCliente(ClientePJ cliente) {
         this.cliente = cliente;
     }
+
+
+    public double calcularValor(){
+
+        //encontrar qtdVeiculos
+        int qtdVeiculos = 0;
+        for (Frota frota: this.listaFrota) {
+            qtdVeiculos += frota.getListaVeiculo().size();
+        }
+        //encontrar idade
+        int AnosPosFundacao = (Period.between(cliente.getDataFundacao(),LocalDate.now())).getYears();
+        //encontrar qtdSinistros/cliente
+        int qtdSinistrosCli = getSeguradora().getSinistrosPorCliente(cliente).size();
+        //encontrar qtdSinistros/condutor
+        int qtdSinistrosCon = 0;
+        for (Condutor condutor:super.getListaCondutores()) {
+            qtdSinistrosCon += condutor.getListaSinistros().size();
+        }
+        //
+        return  (CalcSeguro.VALOR_BASE.getValor() * (10 + (cliente.getQtdFuncionarios()/10)) *
+                 (1 + (1/qtdVeiculos)) * (1 + (1/AnosPosFundacao)) *
+                 (2 + (qtdSinistrosCli/10)) * (5 + (qtdSinistrosCon/10))   
+                );
+    }
     
-    //metodos condutor
-    public boolean autorizarCondutor() {
-
-    }
-    public boolean desautorizarCondutor() {
-
-    }
-
-    //Metodos Sinistros
-    public boolean gerarSinistro(Cliente cliente, Veiculo veiculo) {
-        /*  Aqui se gera um sinistro de um cliente e um veículo já existentes,
-            O endereco será o do cliente e a data será uma string.
-         */
-        //verificar se cliente existe
-        boolean existeCliente = false;
-        boolean existeVeiculo = false;
-        for (Cliente clienteCadastrado: listaClientes) {
-            if (clienteCadastrado == cliente) {
-                    existeCliente = true;
-            }                          
-        }
-        //verificar se veiculo exite
-        if (existeCliente) {
-            for (Veiculo veiculoCadastrado: cliente.listarVeiculos()) {
-                if ( veiculoCadastrado == veiculo)  {
-                    existeVeiculo = true;
-                }           
-            }
-        }
-        
-
-        if (existeCliente && existeVeiculo) {
-            //gerar sinistro
-            Sinistro sinistro = new Sinistro("01/01/2023","Rua dos Girassois", this, veiculo, cliente);
-            listaSinistros.add(sinistro);
-            return true;
-        }
-        return false;
-    }
-
-    public int calcularValor(){
-        
-    }
 }
