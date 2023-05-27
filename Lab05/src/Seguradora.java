@@ -60,6 +60,10 @@ public class Seguradora {
         this . endereco = endereco ;
     }
 
+    public ArrayList<Seguro> getListaSeguros() {
+        return this.listaSeguros;
+    }
+
     public ArrayList<Cliente> getListaClientes(String tipoCliente) {
         if (tipoCliente.equals("PF")){
             ArrayList<Cliente> listaClientesPF = new ArrayList<Cliente>();
@@ -71,8 +75,8 @@ public class Seguradora {
             }
             return listaClientesPF;
         }
-        ArrayList<Cliente> listaClientesPJ = new ArrayList<Cliente>();
-        if(tipoCliente.equals("PJ")) {
+        else if(tipoCliente.equals("PJ")) {
+            ArrayList<Cliente> listaClientesPJ = new ArrayList<Cliente>();
             for (Cliente clienteCadastrado: listaClientes) {
                 if (clienteCadastrado instanceof ClientePJ) {
                     listaClientesPJ.add(clienteCadastrado);            
@@ -81,6 +85,7 @@ public class Seguradora {
             }
             return listaClientesPJ;
         }
+        //aqui se retorna a lista com todos os clientes
         return this.listaClientes;  
     }
 
@@ -174,7 +179,7 @@ public class Seguradora {
                 }   
                 if (cliente instanceof ClientePJ){
                     for (Frota frota: ((ClientePJ)cliente).getListaFrotas()) {
-                        for (Veiculo veiculoCadastrado: frota.getListaVeiculo()) {
+                        for (Veiculo veiculoCadastrado: frota.getListaVeiculos()) {
                             if (veiculoCadastrado.equals(veiculo)) {
                                 //veiculo cadastrado, é possível gerar seguro
                                 verificacao = true;
@@ -188,13 +193,13 @@ public class Seguradora {
         }
 
         //seguroPF
-        if (cliente instanceof ClientePF || verificacao) {
+        if (cliente instanceof ClientePF && verificacao) {
             Seguro seguro = new SeguroPF(dataInicio, dataFim, seguradora, veiculo, (ClientePF)cliente);
             listaSeguros.add(seguro);
             return true;
         }
         //seguroPJ
-        if (cliente instanceof ClientePJ || verificacao) {
+        if (cliente instanceof ClientePJ && verificacao) {
             Seguro seguro = new SeguroPJ(dataInicio, dataFim, seguradora, (ClientePJ)cliente);
             listaSeguros.add(seguro);
             return true;

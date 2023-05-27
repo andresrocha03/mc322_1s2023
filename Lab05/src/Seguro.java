@@ -113,6 +113,7 @@ public abstract class Seguro {
         Sinistro sinistro = new Sinistro(data, endereco, this, condutor);
         ArrayList<Sinistro> novaListaSinistros = getListaSinistros();
         novaListaSinistros.add(sinistro);
+        condutor.adicionarSinistro(sinistro);
         setListaSinistros(novaListaSinistros); 
         return true;
     }

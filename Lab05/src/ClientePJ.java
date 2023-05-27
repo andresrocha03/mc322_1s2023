@@ -64,10 +64,10 @@ public class ClientePJ extends Cliente{
         for (Frota frotaCadastrada:listaFrotas) {
             if (frotaCadastrada.equals(frota)) {
                 //frota encontrada
-                for (Veiculo veiculoCadastrado:frotaCadastrada.getListaVeiculo()) {
+                for (Veiculo veiculoCadastrado:frotaCadastrada.getListaVeiculos()) {
                     if (veiculoCadastrado.equals(veiculo)) {
                         //veiculo encontrado, é possível remover
-                        (frotaCadastrada.getListaVeiculo()).remove(veiculo);
+                        (frotaCadastrada.getListaVeiculos()).remove(veiculo);
                         return true;
                     }
 
@@ -94,7 +94,7 @@ public class ClientePJ extends Cliente{
 
     public ArrayList<Veiculo> getVeiculosPorFrota(Frota frota){
         //retornar lista com veiculos
-        return frota.getListaVeiculo();
+        return frota.getListaVeiculos();
     }
 
 
@@ -111,13 +111,3 @@ public class ClientePJ extends Cliente{
 }
 
 
-/*
- 
-public double calcularScore() {
-        //encontrar qtdVeiculos
-        int qtdVeiculos = (this.listarVeiculos()).size();
-        
-        return  CalcSeguro.VALOR_BASE.getValor() * (1+ (qtdFuncionarios/100)) * qtdVeiculos;
-    }
-    
- */

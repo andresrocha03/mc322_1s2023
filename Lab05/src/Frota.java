@@ -3,12 +3,12 @@ import java.util.Random;
 
 public class Frota {
     private String code;
-    private ArrayList<Veiculo> listaVeiculo;
+    private ArrayList<Veiculo> listaVeiculos;
 
 
     public Frota() {
         this.code = generateCodeValue();
-        this.listaVeiculo = new ArrayList<>();
+        this.listaVeiculos = new ArrayList<>();
     }
 
     public String getCode() {
@@ -29,20 +29,20 @@ public class Frota {
             return code;
     }
 
-    public ArrayList<Veiculo> getListaVeiculo() {
-        return this.listaVeiculo;
+    public ArrayList<Veiculo> getListaVeiculos() {
+        return this.listaVeiculos;
     }
 
     public void setListaVeiculo(ArrayList<Veiculo> listaVeiculo) {
-        this.listaVeiculo = listaVeiculo;
+        this.listaVeiculos = listaVeiculo;
     }
 
     public void addVeiculo(Veiculo veiculo){
-        this.listaVeiculo.add(veiculo);
+        this.listaVeiculos.add(veiculo);
     }
 
     public void removeVeiculo(Veiculo veiculo){
-        this.listaVeiculo.remove(veiculo);
+        this.listaVeiculos.remove(veiculo);
     }
 
 }

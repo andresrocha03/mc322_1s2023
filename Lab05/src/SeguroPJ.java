@@ -3,24 +3,24 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class SeguroPJ extends Seguro {
-    private ArrayList<Frota> listaFrota;
+    private ArrayList<Frota> listaFrotas;
     private ClientePJ cliente;
 
 
     public SeguroPJ(LocalDate dataInicio, LocalDate dataFim, Seguradora seguradora, ClientePJ cliente) {
         super(dataInicio,dataFim,seguradora);
-        this.listaFrota = new ArrayList<>();
+        this.listaFrotas = new ArrayList<>();
         this.cliente = cliente;
     }
 
     //getters and setters
 
-    public ArrayList<Frota> getlistaFrota() {
-        return this.listaFrota;
+    public ArrayList<Frota> getListaFrotas() {
+        return this.listaFrotas;
     }
 
     public void setFrota(ArrayList<Frota> novaListaFrota) {
-        this.listaFrota = novaListaFrota;
+        this.listaFrotas = novaListaFrota;
     }
 
     public ClientePJ getCliente() {
@@ -36,8 +36,8 @@ public class SeguroPJ extends Seguro {
 
         //encontrar qtdVeiculos
         int qtdVeiculos = 0;
-        for (Frota frota: this.listaFrota) {
-            qtdVeiculos += frota.getListaVeiculo().size();
+        for (Frota frota: this.listaFrotas) {
+            qtdVeiculos += frota.getListaVeiculos().size();
         }
         //encontrar idade
         int AnosPosFundacao = (Period.between(cliente.getDataFundacao(),LocalDate.now())).getYears();

@@ -11,7 +11,9 @@ public class ClientePF extends Cliente{
     
     
     //construtor
-    public ClientePF(String nome, String endereco, String telefone, String email, String cpf, String genero, LocalDate dataLicenca, String educacao, LocalDate dataNascimento) {
+    public ClientePF(String nome, String endereco, String telefone, 
+                     String email, String cpf, String genero, LocalDate dataLicenca, 
+                     String educacao, LocalDate dataNascimento) {
         super(nome, telefone, endereco, email);
         this.cpf = cpf;
         this.genero = genero;
@@ -71,18 +73,15 @@ public class ClientePF extends Cliente{
         return true;
     }
 
-    public boolean removerVeiculo(String placa) {
+    public boolean removerVeiculo(Veiculo veiculo) {
         //encontrar veiculo e verificar se o veiculo esta cadastrado
         for (Veiculo veiculoCadastrado: listaVeiculos) {
-            if (veiculoCadastrado.getPlaca().equals(placa)) {
+            if (veiculoCadastrado.equals(veiculo)) {
                 //veiculo cadastrado, é possível removê-lo
                 listaVeiculos.remove(veiculoCadastrado);
-                //this.valorSeguro = this.calcularScore();
                 return true;
             }           
         }
-        //veiculo não foi cadastrado, não é possível removê-lo
-        System.out.println("Veiculo " + placa + " não possui cadastro.");
         return false;
     }
     
