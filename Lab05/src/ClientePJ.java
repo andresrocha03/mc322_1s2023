@@ -72,9 +72,13 @@ public class ClientePJ extends Cliente{
                     }
 
                 }
+                //veiculo nao encontrado, devo adiciona-lo
+                (frotaCadastrada.getListaVeiculos()).add(veiculo);
+                        
             }
         }
-    return false;
+
+    return true;
     }
 
     public boolean atualizarFrota(Frota frota){

@@ -121,7 +121,7 @@ public class Seguradora {
                        
         }
         //informar quantos sinistros tem
-        System.out.println("O cliente " + cliente.getNome() + " possui " + numSinistros + " sinistros.");
+        //System.out.println("O cliente " + cliente.getNome() + " possui " + numSinistros + " sinistros.");
         return listaSinistros;
     }
 
@@ -165,6 +165,7 @@ public class Seguradora {
          */
         boolean verificacao = false;
          //verificar existencia de cliente e veiculo
+        
         for (Cliente clienteCadastrado: listaClientes) {
             if (clienteCadastrado.equals(cliente)) {
                 //cliente cadastrado, é possível gerar seguro
@@ -173,22 +174,27 @@ public class Seguradora {
                         if (veiculoCadastrado.equals(veiculo)) {
                             //veiculo cadastrado, é possível gerar seguro
                             verificacao = true;
+                            break;
                         }
                     }
-        
                 }   
-                if (cliente instanceof ClientePJ){
+                else if (cliente instanceof ClientePJ){
+                    System.out.println("é pj");
                     for (Frota frota: ((ClientePJ)cliente).getListaFrotas()) {
                         for (Veiculo veiculoCadastrado: frota.getListaVeiculos()) {
+                            
                             if (veiculoCadastrado.equals(veiculo)) {
+                                System.out.println("é true");
                                 //veiculo cadastrado, é possível gerar seguro
                                 verificacao = true;
+                                break;
                             }
                         }    
                         
                     }
         
-                }      
+                }    
+                if (verificacao == true) break;  
             }
         }
 

@@ -71,18 +71,26 @@ public class AppMain {
         empresa.cadastrarFrota(frota1);
         empresa.atualizarFrota(frota1,veiculoEmpresa);
         System.out.println("----------------------------------------------");
-
+        System.out.println("1"); 
+        
         //instanciar condutores
-        Condutor condutorJoao = new Condutor("256.457.630-33","Joao", "62996973007", "Rua Girassol", "joao@gmail.com", LocalDate.of(1995,01,01), null);
-        Condutor condutorFuncionario = new Condutor("459.846.700-20","Funcionario", "62991419330", "Rua Tulipa", "funcionario@gmail.com", LocalDate.of(2000,01,01), null);
-
+        Condutor condutorJoao = new Condutor("256.457.630-33","Joao", "62996973007", "Rua Girassol", "joao@gmail.com", LocalDate.of(1995,01,01));
+        System.out.println("2");
+        Condutor condutorFuncionario = new Condutor("459.846.700-20","Funcionario", "62991419330", "Rua Tulipa", "funcionario@gmail.com", LocalDate.of(2000,01,01));
+        System.out.println("3");
+        
         //instanciar seguro
         seguradora.gerarSeguro(LocalDate.of(2022,01,01), LocalDate.of(2024,01,01),seguradora, veiculoPessoa, pessoa);
+        System.out.println("4");
         seguradora.gerarSeguro(LocalDate.of(2023,01,01), LocalDate.of(2025,01,01), seguradora, veiculoEmpresa, empresa);
+        System.out.println("5");
 
         //gerar sinistro
         seguradora.getSegurosPorCliente(pessoa).get(0).gerarSinistro(LocalDate.now(),"Rua Acidente Pessoa",condutorJoao);
+        System.out.println("6");
+
         seguradora.getSegurosPorCliente(empresa).get(0).gerarSinistro(LocalDate.now(),"Rua Acidente Empresa",condutorFuncionario);
+        System.out.println("7");
         
         //listarClientes, visualizarSinistro, listarSinistros
         System.out.println(seguradora.getListaClientes("PF"));

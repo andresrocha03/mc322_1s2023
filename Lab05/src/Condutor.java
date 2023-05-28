@@ -12,14 +12,14 @@ public class Condutor {
     private boolean autorizacao;
 
 
-    public Condutor(String cpf, String nome, String telefone, String endereco, String email, LocalDate dataNasc, ArrayList<Sinistro> listaSinistros) {
+    public Condutor(String cpf, String nome, String telefone, String endereco, String email, LocalDate dataNasc) {
         this.cpf = cpf;
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
         this.email = email;
         this.dataNasc = dataNasc;
-        this.listaSinistros = listaSinistros;
+        this.listaSinistros = new ArrayList<>();
     }
 
     public String getCpf() {
@@ -85,12 +85,12 @@ public class Condutor {
 
     //metodos sinistro
     public boolean adicionarSinistro(Sinistro sinistro){
-        for (Sinistro sinCadastrado: listaSinistros) {
+        for (Sinistro sinCadastrado: this.listaSinistros) {
             if (sinCadastrado.equals(sinistro)) {
                 //sinistro já cadastrado
                 return false;
             }
-        }
+        }    
         listaSinistros.add(sinistro);
         return true;  
     }

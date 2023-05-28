@@ -108,7 +108,7 @@ public enum MenuOperacoes {
     }
 
     public static Seguro escolherSeguro(Seguradora seguradora) {
-        System.out.println("escolha o seguro para listar seus sinistros: ");
+        System.out.println("escolha o seguro : ");
         int i = 0;
         Scanner input = new Scanner(System.in);
         for (Seguro segAux:seguradora.getListaSeguros()) {
@@ -119,6 +119,33 @@ public enum MenuOperacoes {
         int numSeg = input.nextInt();
         return seguradora.getListaSeguros().get(numSeg);
     }
+
+    public static Sinistro escolherSinistro(Seguro seguro) {
+        System.out.println("escolha o sinistro: ");
+        int i = 0;
+        Scanner input = new Scanner(System.in);
+        for (Sinistro sinAux:seguro.getListaSinistros()) {
+            System.out.println(i + ") " + sinAux.getId());
+            System.out.println(sinAux);
+            i++; 
+        }
+        int numSin = input.nextInt();
+        return seguro.getListaSinistros().get(numSin);
+    }
+
+    public static Condutor escolherCondutor(Seguro seguro) {
+        System.out.println("escolha o condutor: ");
+        int i = 0;
+        Scanner input = new Scanner(System.in);
+        for (Condutor conAux:seguro.getListaCondutores()) {
+            System.out.println(i + ") " + conAux.getNome());
+            System.out.println(conAux);
+            i++; 
+        }
+        int numCon = input.nextInt();
+        return seguro.getListaCondutores().get(numCon);
+    }
+
     public static void cadastrarCliente(Seguradora seguradora){
         Scanner entrada = new Scanner(System.in);
         int comando;
@@ -414,18 +441,10 @@ public enum MenuOperacoes {
                 }
             }  
             else if (comando == 3) {
+                Seguro seguro = escolherSeguro(seguradora);
+                Sinistro sinistro = escolherSinistro(seguro);
                 System.out.println("excluindo sinistros...");
-                System.out.println("placa?");
-                String placa = input.next();
-                //encontrar veiculo
-                Sinistro sinistro = null;
-                for (Sinistro sinistroAux: seguradora.getListaSinistros()){
-                    if (sinistroAux.getVeiculo().getPlaca().equals(placa)) {
-                        sinistro = sinistroAux;
-                        break;
-                    }
-                }
-                seguradora.getListaSinistros().remove(sinistro);    
+                seguro.getListaSinistros().remove(sinistro);    
             }
             else if (comando == 4) {
                 voltar = true;
@@ -437,59 +456,62 @@ public enum MenuOperacoes {
     public static void gerarSinistro(Seguradora seguradora){
         Scanner input = new Scanner(System.in);
         
-        System.out.println("nome: ");    
-        String nome = input.next();
+        Seguro seguro = escolherSeguro(seguradora);
         
-        System.out.println("placa do carro: ");    
-        String placa = input.next();
-
-        //encontrar cliente
-        Cliente cliente = encontrarCliente(nome, seguradora);
+        Condutor condutor = escolherCondutor(seguro);
+        System.out.println("Digite o endereco:\n");
+        String endereco = input.next();
         
-        //encontrar veiculo
-        Veiculo veiculo = null;
-        for (Veiculo veiculoAux: cliente.getListaVeiculos()){
-            if (veiculoAux.getPlaca().equals(placa)) {
-                veiculo = veiculoAux;
-                break;
-            }
-        }
+        System.out.println("dataLicenca:\n digite o ano,mes,dia. A cada input, pressione o enter");
+        int ano = input.nextInt();
+        int mes = input.nextInt();
+        int dia = input.nextInt();
         //gerar sinistro
-        seguradora.gerarSinistro(cliente, veiculo);
+        seguro.gerarSinistro(LocalDate.of(ano,mes,dia),endereco,condutor);
     }
 
     public static void transferirSeguro(Seguradora seguradora){
         Scanner input = new Scanner(System.in);
         
-        System.out.println("nome1: ");    
+        System.out.println("nome que possui o seguro: ");    
         String nome1 = input.next();
         
-        System.out.println("nome2: ");    
+        System.out.println("nome para o qual o seguro sera transferido: ");    
         String nome2 = input.next();
 
-        Cliente cliente1 = null;
-        Cliente cliente2 = null;
+        Cliente cliente1 = encontrarCliente(nome1, seguradora);
+        Cliente cliente2 = encontrarCliente(nome2, seguradora);
 
-        
-        //encontrar clientes
-        for (Cliente clienteAux: seguradora.getListaClientes("todos")) {
-            if (clienteAux.getNome().equals(nome1)){
-                cliente1 = clienteAux;
+        System.out.println("1 p/ escolher seguro e 2 p/transferir todos os seguros");
+        int opcao = input.nextInt();
+        if (opcao == 1) {
+            Seguro seguro = escolherSeguro(seguradora);
+            if (seguro instanceof SeguroPF) {
+                ((SeguroPF)seguro).setCliente((ClientePF)cliente2);
             }
-            if (clienteAux.getNome().equals(nome2)){
-                cliente2 = clienteAux;
+            else {
+                ((SeguroPJ)seguro).setCliente((ClientePJ)cliente2);
             }
         }
-        
-        //transferir lista de veiculos
-        for (Veiculo veiculo: cliente1.getListaVeiculos()){
-            cliente2.getListaVeiculos().add(veiculo);
-        }
-        cliente1.setListaVeiculo(new ArrayList<Veiculo>());
+        else if (opcao == 2) {
+            for (Seguro segAux: seguradora.getListaSeguros()) {
+                if (cliente1 instanceof ClientePJ) {
+                    if (segAux instanceof SeguroPJ){
+                        ((SeguroPJ)segAux).setCliente((ClientePJ)cliente2);
+                    }
+                }
+                else {
+                    if (segAux instanceof SeguroPF){
+                        ((SeguroPF)segAux).setCliente((ClientePF)cliente2);
+                    }
+                }
     
-        //recalcular scores
-        cliente1.setValorSeguro(cliente1.calcularScore());
-        cliente2.setValorSeguro(cliente1.calcularScore());
+            }
+        }
+        
+    
+        //recalcular VALores mensais
+        
     }
 
     public static void calcReceita(Seguradora seguradora){
