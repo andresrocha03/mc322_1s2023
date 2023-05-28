@@ -252,13 +252,13 @@ public class Seguradora {
     @Override
     public String toString() {
         return "{" +
-            " cnpj='" + getCnpj() + "'" +
-            ", nome='" + getNome() + "'" +
+            " cnpj='" + cnpj+ "'" +
+            ", nome='" + nome + "'" +
             ", telefone='" + getTelefone() + "'" +
             ", email='" + getEmail() + "'" +
             ", endereco='" + getEndereco() + "'" +
             ", listaSeguros='" + getListaSeguros() + "'" +
-            ", listaClientes='" + getListaClientes() + "'" +
+            ", listaClientes='" + getListaClientes("") + "'" +
             "}";
     }
      
