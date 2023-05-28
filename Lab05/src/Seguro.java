@@ -77,6 +77,8 @@ public abstract class Seguro {
     }
 
     //metodos Condutor
+    //cadastrar condutor
+
     public boolean autorizarCondutor(Condutor condutor){
         //encontrar condutor
         for (Condutor condutorCadastrado: listaCondutores) {
