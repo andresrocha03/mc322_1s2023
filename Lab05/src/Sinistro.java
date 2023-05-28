@@ -57,10 +57,16 @@ public class Sinistro {
         this.condutor = condutor;
     }
 
+
+    @Override
     public String toString() {
-        return  "id:" + id + "\ndata:" + data + "\nendereco:" + endereco +
-                "\nseguro:" + seguro ;
-                
-                
+        return "{" +
+            " id='" + getId() + "'" +
+            ", data='" + getData() + "'" +
+            ", endereco='" + getEndereco() + "'" +
+            ", condutor='" + getCondutor() + "'" +
+            ", seguro='" + getSeguro() + "'" +
+            "}";
     }
+    
 }

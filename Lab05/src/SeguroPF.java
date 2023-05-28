@@ -63,6 +63,7 @@ public class SeguroPF extends Seguro {
     }
 
 
+
     @Override
     public String toString() {
         return "{" +
@@ -70,6 +71,7 @@ public class SeguroPF extends Seguro {
             ", cliente='" + getCliente() + "'" +
             "}";
     }
+   
 
 
 }

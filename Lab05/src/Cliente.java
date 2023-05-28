@@ -45,13 +45,17 @@ public class Cliente {
         this.endereco = endereco ;
     }
 
+
+    @Override
     public String toString() {
-        return 
-            "nome: " + nome +
-            "\ntelefone: " + telefone +
-            "\nendereco: " + endereco +
-            "\nemail: " + email;
+        return "{" +
+            " nome='" + getNome() + "'" +
+            ", telefone='" + getTelefone() + "'" +
+            ", endereco='" + getEndereco() + "'" +
+            ", email='" + getEmail() + "'" +
+            "}";
     }
+
     
 }
 

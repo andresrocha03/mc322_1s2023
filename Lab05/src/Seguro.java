@@ -118,4 +118,18 @@ public abstract class Seguro {
         return true;
     }
     
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", dataInicio='" + getDataInicio() + "'" +
+            ", dataFim='" + getDataFim() + "'" +
+            ", seguradora='" + getSeguradora() + "'" +
+            ", listaSinistros='" + getListaSinistros() + "'" +
+            ", listaCondutores='" + getListaCondutores() + "'" +
+            ", valorMensal='" + getValorMensal() + "'" +
+            "}";
+    }
+
 }

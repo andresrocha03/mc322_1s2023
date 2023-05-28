@@ -87,36 +87,18 @@ public class ClientePF extends Cliente{
     
    
     
+
+    @Override
     public String toString() {
-        return 
-            super.toString() +
-            "cpf: " + cpf +
-            "\ngenero: " + genero +
-            "\neducacao: " + educacao +
-            "\ndataNascimento: " + dataNascimento +
-            "\nlistaVeiculos:" + this.listaVeiculos;
-        }
+        return "{" +
+            " cpf='" + getCpf() + "'" +
+            ", genero='" + getGenero() + "'" +
+            ", educacao='" + getEducacao() + "'" +
+            ", dataNascimento='" + getDataNascimento() + "'" +
+            ", listaVeiculos='" + getListaVeiculos() + "'" +
+            "}";
+    }
+   
     
     
 }
-
-/*
-  public double calcularScore() {
-        int qtdVeiculos = (this.listarVeiculos()).size();
-        //encontrar idade
-        int idade = (Period.between(this.dataNascimento,LocalDate.now())).getYears();
-        double fatorIdade = 0;
-        if ((18 <= idade) && (idade <=30)) {
-            fatorIdade = CalcSeguro.FATOR_18_30.getValor();
-        }
-        else if ((30<idade) && (idade <= 60)) {
-            fatorIdade = CalcSeguro.FATOR_30_60.getValor();
-        }
-        else {
-            fatorIdade = CalcSeguro.FATOR_60_90.getValor();
-        }
-        return (CalcSeguro.VALOR_BASE.getValor() * fatorIdade * qtdVeiculos);
-    }
-
-
- */

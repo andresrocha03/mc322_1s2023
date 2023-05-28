@@ -103,14 +103,17 @@ public class ClientePJ extends Cliente{
 
 
     
-    //toString
+
+    @Override
     public String toString() {
-        return 
-            super.toString() +
-            "\nCNPJ: " + getCNPJ() + 
-            "\ndataFundacao: " + getDataFundacao() +
-            "\nlistaFrota: " + getListaFrotas();
+        return "{" +
+            " CNPJ='" + getCNPJ() + "'" +
+            ", dataFundacao='" + getDataFundacao() + "'" +
+            ", listaFrotas='" + getListaFrotas() + "'" +
+            ", qtdFuncionarios='" + getQtdFuncionarios() + "'" +
+            "}";
     }
+    
 
 }
 

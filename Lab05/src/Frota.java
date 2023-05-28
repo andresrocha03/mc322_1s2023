@@ -45,4 +45,13 @@ public class Frota {
         this.listaVeiculos.remove(veiculo);
     }
 
+
+    @Override
+    public String toString() {
+        return "{" +
+            " code='" + getCode() + "'" +
+            ", listaVeiculos='" + getListaVeiculos() + "'" +
+            "}";
+    }
+
 }

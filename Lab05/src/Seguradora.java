@@ -248,15 +248,20 @@ public class Seguradora {
         return receita; 
     }
     
-    //toString
-    public String toString() { 
-        return 
-        "nome: " + nome +
-        "\ntelefone: " + telefone +
-        "\nemail: " + email+  
-        "\nendereco: " + endereco;
-    } 
-            
+
+    @Override
+    public String toString() {
+        return "{" +
+            " cnpj='" + getCnpj() + "'" +
+            ", nome='" + getNome() + "'" +
+            ", telefone='" + getTelefone() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", endereco='" + getEndereco() + "'" +
+            ", listaSeguros='" + getListaSeguros() + "'" +
+            ", listaClientes='" + getListaClientes() + "'" +
+            "}";
+    }
+     
     
 }
 

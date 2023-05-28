@@ -55,4 +55,13 @@ public class SeguroPJ extends Seguro {
                 );
     }
     
+
+    @Override
+    public String toString() {
+        return "{" +
+            " listaFrotas='" + getListaFrotas() + "'" +
+            ", cliente='" + getCliente() + "'" +
+            "}";
+    }
+
 }

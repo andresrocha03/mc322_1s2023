@@ -45,8 +45,15 @@ public class Veiculo {
         this . anoFabricacao = anoFabricacao    ;
     }
 
+
+    @Override
     public String toString() {
-        return  "placa:" + placa + "\nmarca:" + marca + "\nmodelo:" + modelo +
-                "\nano fabricacao:" + anoFabricacao;
+        return "{" +
+            " placa='" + getPlaca() + "'" +
+            ", marca='" + getMarca() + "'" +
+            ", modelo='" + getModelo() + "'" +
+            ", anoFabricacao='" + getAnoFabricacao() + "'" +
+            "}";
     }
+    
 }
