@@ -9,6 +9,7 @@ public enum MenuOperacoes {
     GERAR_SINISTRO(4),
     TRANSFERIR_SEGURO(5),
     CALC_RECEITA_SEGURADORA(6),
+    AUTORIZAR_CONDUTOR(7),
     SAIR(0);
     
     public final int valor;
@@ -61,13 +62,15 @@ public enum MenuOperacoes {
                 OpSeguradora.cadastrarSeguradora(listaSeguradora);
             }
             else if (comando == 4) {
-                OpCondutor.cadastrarCondutor();
+                Seguro seguro = OpSeguro.escolherSeguro(seguradora);
+                OpCondutor.cadastrarCondutor(seguro);
             }
             else if (comando == 5) {
-                OpFrota.cadastrarFrota();
+                Cliente cliente = OpCliente.escolherCliente(seguradora);
+                OpFrota.cadastrarFrota((ClientePJ)cliente);
             }
             else if (comando == 6) {
-                OpSegurao.cadastrarSeguro();
+                OpSeguro.cadastrarSeguro(seguradora);
             }
             else if (comando == 7) {
                 voltar = true;
@@ -83,22 +86,8 @@ public enum MenuOperacoes {
         
         do {
             System.out.println("O que deseja listar? digite o numero correspondente");
-            System.out.println("1:Veiculos por Cliente\n 
-            2:Frotas por ClientePJ\n 
-            Seguros por Cliente
-            Sinistros por Cliente
-            3:Sinistros por Condutor\n 
-            Cliente por Seguradora\n
-            Sinistros por Seguro
-            Condutores por Seguro
-            Frotas por SeguroPJ
-            4: 
-            5:Veiculo por Seguro\n 
-            6:Condutor\n
-            Sinistro por Seguro/
-            Sinistro por Cliente
-            10:VOLTAR");
-            
+            System.out.println(" 1:Cliente por Seguradora\n 2:Sinistros por Seguro\n 3:Sinistros por Cliente");
+            System.out.println("4:Veiculos por Cliente\n 5:Veiculos por Seguro\n 6:Seguros por Cliente\n 7:VOLTAR\n");
             int comando = input.nextInt();
             if (comando == 1) {
 
@@ -126,19 +115,17 @@ public enum MenuOperacoes {
                 System.out.println("listando veiculos por Cliente...");
                 System.out.println("Digite o nome do cliente");
                 String nome = input.next();
-                System.out.println("listando veiculos por Cliente...");
                 Cliente cliente = OpCliente.encontrarCliente(nome, seguradora);
+                System.out.println("listando veiculos por Cliente...");
                 if (cliente instanceof ClientePF) {
                     System.out.println(((ClientePF)cliente).getListaVeiculos());
                 }
                 else if (cliente instanceof ClientePJ) {
                     //todas as frotas
-                    for(frotinha :listafrotas){
-                        print(frota.listaveiculos)
-                    }
-                    //escolher frota
-                    Frota frotaEscolhida = OpFrota.escolherFrota((ClientePJ)cliente); 
-                    System.out.println(frotaEscolhida.getListaVeiculos());
+                    for(Frota frotaAux : ((ClientePJ)cliente).getListaFrotas()){
+                        System.out.println("Veiculos da frota" + frotaAux.getCode());
+                        System.out.println(frotaAux.getListaVeiculos());
+                    }                    
                 }
                  
             }
@@ -154,19 +141,26 @@ public enum MenuOperacoes {
                 }
             }
             else if (comando == 6) {
+                System.out.println("Digite o nome do cliente");
+                String nome = input.next();
+                Cliente cliente = OpCliente.encontrarCliente(nome, seguradora);
+                System.out.println(seguradora.getSegurosPorCliente(cliente)); 
+            }
+            else if (comando == 7) {
                 voltar = true;
             }
         } while (!voltar);
         
     }
 
-    public static void excluir(Seguradora seguradora) {
+    public static void excluir(Seguradora seguradora, ArrayList<Seguradora> listaSeguradoras) {
         boolean voltar = false;
         Scanner input = new Scanner(System.in);
         
         do {
             System.out.println("O que deseja excluir? digite o numero correspondente");
-            System.out.println("1:CLIENTE 2:VEICULO/ 3:Sinistro / 4:VOLTAR");
+            System.out.println(" 1:CLIENTE\n 2:VEICULO\n 3:Sinistro\n");
+            System.out.println(" 4:Frota\n 5:Condutor\n 6:Seguro\n 7: Seguradora \n 8:VOLTAR"); 
             
             int comando = input.nextInt();
             
@@ -195,23 +189,41 @@ public enum MenuOperacoes {
             else if (comando == 3) {
                 Seguro seguro = OpSeguro.escolherSeguro(seguradora);
                 Sinistro sinistro = OpSinistro.escolherSinistro(seguro);
-                System.out.println("excluindo sinistros...");
                 seguro.getListaSinistros().remove(sinistro);    
+                System.out.println("sinistro removido com sucesso!\n");
             }
             else if (comando == 4) {
+                Cliente cliente = OpCliente.escolherCliente(seguradora);
+                Frota frota = OpFrota.escolherFrota((ClientePJ)cliente);
+                ((ClientePJ)cliente).atualizarFrota(frota);
+                System.out.println("frota removida com sucesso!\n");
+            }
+            else if (comando == 5) {
+                Seguro seguro = OpSeguro.escolherSeguro(seguradora);
+                Condutor condutor = OpCondutor.escolherCondutor(seguro);
+                seguro.getListaCondutores().remove(condutor);
+                System.out.println("condutor removido com sucesso!\n");    
+            }
+            else if (comando == 6) {
+                Seguro seguro = OpSeguro.escolherSeguro(seguradora);
+                seguradora.cancelarSeguro(seguro);   
+                System.out.println("Seguro excluido com sucesso!\n");
+                
+            }
+            else if (comando == 7) {
+                Seguradora seguradoraAux = OpSeguradora.escolherSeguradora(listaSeguradoras);
+                listaSeguradoras.remove(seguradoraAux);   
+                System.out.println("seguradora removida com sucesso!\n");
+                 
+            }
+            else if (comando == 8) {
                 voltar = true;
             }
         } while (!voltar);
         
     }
 
-    public static void calcReceita(Seguradora seguradora){
-        System.out.println("calculando receita...");
-        double receita = seguradora.calcularReceita();
-        //printar
-        System.out.println("A receita é " + receita);
-    }
-
+   
     
 
 

@@ -68,6 +68,10 @@ public abstract class Seguro {
         return listaCondutores;
     }
 
+    public void setListaCondutores(ArrayList<Condutor> novalistaCondutores) {
+        this.listaCondutores = novalistaCondutores;
+    }
+
     public double getValorMensal() {
         return this.valorMensal;
     }
@@ -77,7 +81,18 @@ public abstract class Seguro {
     }
 
     //metodos Condutor
-    //cadastrar condutor
+    public boolean cadastrarCondutor(Condutor condutor){
+       //verificar se o seguro ja esta cadastrado
+       for (Condutor conCadastrado: listaCondutores) {
+        if (conCadastrado.equals(condutor)) {
+            //seguro ja cadastrado
+            return false;
+        }           
+    }
+    //seguro novo
+    listaCondutores.add(condutor);
+    return true;
+    }
 
     public boolean autorizarCondutor(Condutor condutor){
         //encontrar condutor

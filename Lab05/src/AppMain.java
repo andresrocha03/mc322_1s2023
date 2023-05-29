@@ -22,17 +22,19 @@ public class AppMain {
                 MenuOperacoes.listar(seguradora);
                 break;
             case EXCLUIR:
-                MenuOperacoes.excluir(seguradora);
+                MenuOperacoes.excluir(seguradora, listaSeguradoras);
                 break;
             case GERAR_SINISTRO:
-                MenuOperacoes.gerarSinistro(seguradora);
+                OpSinistro.gerarSinistro(seguradora);
                 break;
             case TRANSFERIR_SEGURO:
-                MenuOperacoes.transferirSeguro(seguradora);
+                OpSeguro.transferirSeguro(seguradora);
                 break;
             case CALC_RECEITA_SEGURADORA:
-                MenuOperacoes.calcReceita(seguradora);
+                OpSeguradora.calcReceita(seguradora);
                 break;
+            case AUTORIZAR_CONDUTOR:
+                
             case SAIR:
                 break;
         }
@@ -111,20 +113,11 @@ public class AppMain {
         Scanner input = new Scanner(System.in);
         int valor = -1;
         do {
-            System.out.println("escolha nome seguradora: ");
-            for (Seguradora segAux:listaSeguradoras) {
-                System.out.println(segAux.getNome()); 
-            }
-            String nomeSeg = input.next();
-            Seguradora escolhido = null;
-            for (Seguradora s:listaSeguradoras){
-                if (s.getNome().equals(nomeSeg)) {
-                    escolhido = s;
-                }
-            }
-
-            System.out.println("escolha\n1:CADASTAR/\n2:LISTAR/\n3:EXCLUIR/\n4:GERARSINISTRO/\n5:TRANSFERIRSEGURO/\n6:CALCULARRECEITASEGURADORA/\n0:SAIR\n");
+            Seguradora escolhido = OpSeguradora.escolherSeguradora(listaSeguradoras);
+            System.out.println("escolha\n 1:CADASTAR\n 2:LISTAR\n 3:EXCLUIR\n 4:GERARSINISTRO\n 5:TRANSFERIRSEGURO\n");
+            System.out.println(" 6:CALCULAR RECEITA SEGURADORA\n 7:AUTORIZAR CONDUTOR\n 0:SAIR\n");
             valor = input.nextInt();
+
             //input.nextLine();
             if (valor != 0) {
                 MenuOperacoes operacao = MenuOperacoes.getOperacao(valor);

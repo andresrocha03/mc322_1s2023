@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+import javax.swing.plaf.synth.SynthIcon;
+
 import java.time.LocalDate;
 
 public class OpCliente {
@@ -13,11 +16,29 @@ public class OpCliente {
                 return cliente;
             }
         }
-        System.out.println("retornando cliente e seus dados");
+        //System.out.println("retornando cliente e seus dados");
         return cliente;
         
     }
 
+    public static Cliente escolherCliente(Seguradora seguradora){
+        //funcao que devolve o objeto cliente, sabendo em que seguradora este esta
+        Scanner input = new Scanner(System.in);
+        System.out.println("nome do cliente?");
+        String nome = input.next();
+        Cliente cliente=null;
+
+        for (Cliente clienteAux: seguradora.getListaClientes("todos")) {
+            if (clienteAux.getNome().equals(nome)){
+                cliente = clienteAux;
+                return cliente;
+            }
+        }
+        return cliente;
+        
+    }
+
+                
     public static void cadastrarCliente(Seguradora seguradora){
         Scanner entrada = new Scanner(System.in);
         int comando;

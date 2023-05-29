@@ -14,6 +14,7 @@ public class OpFrota {
         return frota;
 
     }
+    
     public static Frota escolherFrota(ClientePJ cliente) {
         int i = 0;
         Scanner input = new Scanner(System.in);
@@ -37,4 +38,16 @@ public class OpFrota {
         int numFrota = input.nextInt();
         return seguro.getListaFrotas().get(numFrota);
     }
+
+    public static boolean cadastrarFrota(ClientePJ cliente) {
+        //criar nova frota
+        Frota novaFrota = new Frota();
+        if (cliente.cadastrarFrota(novaFrota)) {
+            System.out.println("Nova frota" + novaFrota.getCode() + "cadastrada com sucesso!");
+            return true;
+        }
+        System.out.println("erro no cadastro de frota :(");
+        return false;
+    }
+
 }

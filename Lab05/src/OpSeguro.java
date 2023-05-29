@@ -1,6 +1,8 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class OpSeguro {
+   
     public static Seguro escolherSeguro(Seguradora seguradora) {
         System.out.println("escolha o seguro : ");
         int i = 0;
@@ -13,6 +15,7 @@ public class OpSeguro {
         int numSeg = input.nextInt();
         return seguradora.getListaSeguros().get(numSeg);
     }
+   
     public static void transferirSeguro(Seguradora seguradora){
         Scanner input = new Scanner(System.in);
         
@@ -51,5 +54,68 @@ public class OpSeguro {
     
             }
         }
+    }
+
+    public static boolean cadastrarSeguro(Seguradora seguradora) {
+        //criar nova frota
+        Scanner entrada = new Scanner(System.in);
+        int comando;
+        System.out.println("Qual tipo de Seguro  deseja cadastrar? digite o numero correspondente");
+        System.out.println(" 1:PF\n 2:PJ");
+        comando = entrada.nextInt();
+        entrada.nextLine();
+
+        
+        if (comando == 1) {
+            System.out.println("data inicio:\n digite o ano,mes,dia. A cada entrada, pressione o enter");
+            int anoI = entrada.nextInt();
+            entrada.nextLine();
+            int mesI = entrada.nextInt();
+            entrada.nextLine();
+            int diaI = entrada.nextInt();
+            entrada.nextLine();
+            System.out.println("data fim:\n digite o ano,mes,dia. A cada entrada, pressione o enter");
+            int anoF = entrada.nextInt();
+            entrada.nextLine();
+            int mesF = entrada.nextInt();
+            entrada.nextLine();
+            int diaF = entrada.nextInt();
+            entrada.nextLine();
+            Cliente cliente = OpCliente.escolherCliente(seguradora);
+            Veiculo veiculo = OpVeiculo.escolherVeiculo(cliente);
+
+            SeguroPF novoSeguro = new SeguroPF(LocalDate.of(anoI,mesI,diaI),LocalDate.of(anoF, mesF, diaF), seguradora, veiculo, (ClientePF)cliente);
+            if (seguradora.cadastrarSeguro(novoSeguro)) {
+                System.out.println("Novo seguro" + novoSeguro.getId() + "cadastrado com sucesso!");
+                return true;
+            }
+        }
+        else if (comando == 2){
+            System.out.println("data inicio:\n digite o ano,mes,dia. A cada entrada, pressione o enter");
+            int anoI = entrada.nextInt();
+            entrada.nextLine();
+            int mesI = entrada.nextInt();
+            entrada.nextLine();
+            int diaI = entrada.nextInt();
+            entrada.nextLine();
+            System.out.println("data fim:\n digite o ano,mes,dia. A cada entrada, pressione o enter");
+            int anoF = entrada.nextInt();
+            entrada.nextLine();
+            int mesF = entrada.nextInt();
+            entrada.nextLine();
+            int diaF = entrada.nextInt();
+            entrada.nextLine();
+            Cliente cliente = OpCliente.escolherCliente(seguradora);
+
+            SeguroPJ novoSeguro = new SeguroPJ(LocalDate.of(anoI,mesI,diaI),LocalDate.of(anoF, mesF, diaF), seguradora, (ClientePJ)cliente);
+            if (seguradora.cadastrarSeguro(novoSeguro)) {
+                System.out.println("Novo seguro" + novoSeguro.getId() + "cadastrado com sucesso!");
+                return true;
+            }
+        }
+        
+        
+        System.out.println("erro no cadastro de seguro :(");
+        return false;
     }
 }

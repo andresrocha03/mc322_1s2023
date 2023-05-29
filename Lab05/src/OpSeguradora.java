@@ -22,5 +22,30 @@ public class OpSeguradora {
         lista.add(novaSeguradora);
     }
 
+    public static Seguradora escolherSeguradora(ArrayList<Seguradora> listaSeguradoras) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("escolha nome seguradora: ");
+        for (Seguradora segAux:listaSeguradoras) {
+            System.out.println(segAux.getNome()); 
+        }
+        String nomeSeg = input.next();
+        Seguradora escolhido = null;
+        for (Seguradora s:listaSeguradoras){
+            if (s.getNome().equals(nomeSeg)) {
+                escolhido = s;
+            }
+        }
+        return escolhido;
+    }
+
+    public static void calcReceita(Seguradora seguradora){
+        System.out.println("calculando receita...");
+        double receita = seguradora.calcularReceita();
+        //printar
+        System.out.println("A receita é " + receita);
+    }
+
+
+
    
 }

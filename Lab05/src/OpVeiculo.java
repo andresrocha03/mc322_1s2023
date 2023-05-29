@@ -14,15 +14,39 @@ public class OpVeiculo {
             }
         }
         else if (cliente instanceof ClientePJ) {
-            Frota frota = OpFrota.encontrarFrota(veiculo, (ClientePJ)cliente);
-            for (Veiculo VeiculoAux: frota.getListaVeiculos()) {
-                if (VeiculoAux.getPlaca().equals(placa)){
-                    veiculo = VeiculoAux;
-                    return veiculo;
+            for (Frota frotaAux: ((ClientePJ)cliente).getListaFrotas()) {
+                for (Veiculo VeiculoAux: frotaAux.getListaVeiculos()) {
+                    if (VeiculoAux.getPlaca().equals(placa)){
+                        veiculo = VeiculoAux;
+                        return veiculo;
+                    }
+                
                 }
-            
             }
         }
+        return veiculo;
+    }
+
+    public static Veiculo escolherVeiculo(Cliente cliente){
+        
+        //funcao que devolve o objeto Veiculo, sabendo em que cliente este esta
+        Veiculo veiculo = null;
+        if (cliente instanceof ClientePF) {
+            for (Veiculo veiculoAux: ((ClientePF)cliente).getListaVeiculos()) {
+                System.out.println(veiculoAux);
+            }
+        }
+        else if (cliente instanceof ClientePJ) {
+            for (Frota frotaAux: ((ClientePJ)cliente).getListaFrotas()) {
+                for (Veiculo veiculoAux: frotaAux.getListaVeiculos()) {
+                        System.out.println(veiculoAux);
+                }
+            }
+        }
+        System.out.println("Digite a placa do veiculo escolhido: ");
+        Scanner entrada = new Scanner(System.in);
+        String placa = entrada.next();
+        veiculo = encontrarVeiculo(placa, cliente);
         return veiculo;
     }
 

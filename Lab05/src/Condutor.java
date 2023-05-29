@@ -20,6 +20,7 @@ public class Condutor {
         this.email = email;
         this.dataNasc = dataNasc;
         this.listaSinistros = new ArrayList<>();
+        this.autorizacao = false;
     }
 
     public String getCpf() {

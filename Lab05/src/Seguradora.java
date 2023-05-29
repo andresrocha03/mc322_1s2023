@@ -144,7 +144,7 @@ public class Seguradora {
             if (clienteCadastrado.equals(cliente)) {
                 //cliente cadastrado, é possível removê-lo
                 listaClientes.remove(clienteCadastrado);
-                //remover sinistros existentes no nome do cliente
+                //remover seguros existentes no nome do cliente
                 for (Seguro segCadastrado: listaSeguros) {
                     if (segCadastrado.getCliente().equals(cliente)) {
                         listaSeguros.remove(segCadastrado);
