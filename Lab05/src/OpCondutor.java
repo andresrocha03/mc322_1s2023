@@ -64,4 +64,21 @@ public class OpCondutor {
         return false;
     }
 
+    public static Boolean autorizacaoCondutor(Seguradora seguradora) {
+        Scanner entrada = new Scanner(System.in);
+        Seguro seguro = OpSeguro.escolherSeguro(seguradora);
+        Condutor condutor = escolherCondutor(seguro);
+        System.out.println("1 para autorizar\n2 para desautorizar");
+        int comando = entrada.nextInt();
+        if (comando == 1) {
+            seguro.autorizarCondutor(condutor);
+        }
+        else if (comando == 2) {
+            seguro.desautorizarCondutor(condutor);
+        }
+        System.out.println("a autorizacao do condutor " + condutor.getNome() + " é "  + condutor.getAutorizacao());
+        return true;
+    }
+
+
 }

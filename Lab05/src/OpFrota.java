@@ -43,7 +43,7 @@ public class OpFrota {
         //criar nova frota
         Frota novaFrota = new Frota();
         if (cliente.cadastrarFrota(novaFrota)) {
-            System.out.println("Nova frota" + novaFrota.getCode() + "cadastrada com sucesso!");
+            System.out.println("Nova frota " + novaFrota.getCode() + "cadastrada com sucesso!");
             return true;
         }
         System.out.println("erro no cadastro de frota :(");

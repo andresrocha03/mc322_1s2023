@@ -33,8 +33,8 @@ public class AppMain {
             case CALC_RECEITA_SEGURADORA:
                 OpSeguradora.calcReceita(seguradora);
                 break;
-            case AUTORIZAR_CONDUTOR:
-                
+            case AUTORIZACAO_CONDUTOR:
+                OpCondutor.autorizacaoCondutor(seguradora);
             case SAIR:
                 break;
         }
@@ -45,16 +45,16 @@ public class AppMain {
 
 
         //instanciar clientes
-        ClientePF pessoa = new ClientePF("Joao", "Rua Girassol","62996973007","joao@gmail.com","256.457.630-33", 
+        ClientePF pessoa = new ClientePF("joao", "Rua Girassol","62996973007","joao@gmail.com","256.457.630-33", 
                                   "masculino", LocalDate.of(2015,01,01), "superior completo",LocalDate.of(1995,01,01));        
-        ClientePJ empresa = new ClientePJ("FrangoSA","6232263007", "frangosa@gmail.com","Avenida Paulista",  
+        ClientePJ empresa = new ClientePJ("frangofrito","6232263007", "frangosa@gmail.com","Avenida Paulista",  
                                      "57.262.176/0001-39",LocalDate.of(2000,01,01),10);
-        ClientePF marinalva = new ClientePF("Marinalva", "Rua Tulipa","62992699330","marinalva@gmail.com","133.560.470-78",
+        ClientePF marinalva = new ClientePF("marinalva", "Rua Tulipa","62992699330","marinalva@gmail.com","133.560.470-78",
                                      "feminino", LocalDate.of(2016,01,01), "superior completo",LocalDate.of(1985,01,01));
 
         
         //instanciar seguradora
-        Seguradora seguradora = new Seguradora("96.513.152/0001-67","Seguranca", "996683883", "esperancaseguradora@gmail.com", "Aevenida Faria Lima");
+        Seguradora seguradora = new Seguradora("96.513.152/0001-67","seguranca", "996683883", "esperancaseguradora@gmail.com", "Aevenida Faria Lima");
         listaSeguradoras.add(seguradora);
         
         //cadastrar clientes
@@ -70,26 +70,21 @@ public class AppMain {
         empresa.cadastrarFrota(frota1);
         empresa.atualizarFrota(frota1,veiculoEmpresa);
         System.out.println("----------------------------------------------");
-        System.out.println("1"); 
-        
-        //instanciar condutores
-        Condutor condutorJoao = new Condutor("256.457.630-33","Joao", "62996973007", "Rua Girassol", "joao@gmail.com", LocalDate.of(1995,01,01));
-        System.out.println("2");
-        Condutor condutorFuncionario = new Condutor("459.846.700-20","Funcionario", "62991419330", "Rua Tulipa", "funcionario@gmail.com", LocalDate.of(2000,01,01));
-        System.out.println("3");
         
         //instanciar seguro
         seguradora.gerarSeguro(LocalDate.of(2022,01,01), LocalDate.of(2024,01,01),seguradora, veiculoPessoa, pessoa);
-        System.out.println("4");
         seguradora.gerarSeguro(LocalDate.of(2023,01,01), LocalDate.of(2025,01,01), seguradora, veiculoEmpresa, empresa);
-        System.out.println("5");
+        
+        //instanciar e cadastrar condutores
+        Condutor condutorJoao = new Condutor("256.457.630-33","Joao", "62996973007", "Rua Girassol", "joao@gmail.com", LocalDate.of(1995,01,01));
+        Condutor condutorFuncionario = new Condutor("459.846.700-20","Funcionario", "62991419330", "Rua Tulipa", "funcionario@gmail.com", LocalDate.of(2000,01,01));
+        seguradora.getListaSeguros().get(0).cadastrarCondutor(condutorJoao);
+        seguradora.getListaSeguros().get(0).cadastrarCondutor(condutorFuncionario);
+        
 
         //gerar sinistro
-        seguradora.getSegurosPorCliente(pessoa).get(0).gerarSinistro(LocalDate.now(),"Rua Acidente Pessoa",condutorJoao);
-        System.out.println("6");
-
+        seguradora.getSegurosPorCliente(pessoa).get(0).gerarSinistro(LocalDate.now(),"Rua Acidente Pessoa",condutorJoao); 
         seguradora.getSegurosPorCliente(empresa).get(0).gerarSinistro(LocalDate.now(),"Rua Acidente Empresa",condutorFuncionario);
-        System.out.println("7");
         
         //listarClientes, visualizarSinistro, listarSinistros
         System.out.println(seguradora.getListaClientes("PF"));
@@ -97,6 +92,8 @@ public class AppMain {
         System.out.println(seguradora.getListaClientes("PJ"));
         System.out.println("----------------------------------------------");
         System.out.println(seguradora.getSinistrosPorCliente(pessoa));
+        
+        
         System.out.println("----------------------------------------------");
         System.out.println(seguradora.getSinistrosPorCliente(empresa));
         System.out.println("----------------------------------------------");
@@ -104,17 +101,27 @@ public class AppMain {
         System.out.println("----------------------------------------------");
         System.out.println(seguradora.getSegurosPorCliente(empresa));
         System.out.println("----------------------------------------------");
+        //chamar funcoes toString
+        System.out.println(pessoa);
+        System.out.println(empresa);
+        System.out.println(veiculoPessoa);
+            //toString seguro
+        System.out.println(seguradora.getListaSeguros().get(0));
+        System.out.println(condutorFuncionario);
+            //toString sinistro
+        System.out.println(seguradora.getSinistrosPorCliente(pessoa).get(0));
         
         //calcularReceita
         System.out.println("Receita seguradora: " + seguradora.calcularReceita());
         System.out.println("----------------------------------------------");
-            
+          
         //leitura de dados
+        
         Scanner input = new Scanner(System.in);
         int valor = -1;
         do {
             Seguradora escolhido = OpSeguradora.escolherSeguradora(listaSeguradoras);
-            System.out.println("escolha\n 1:CADASTAR\n 2:LISTAR\n 3:EXCLUIR\n 4:GERARSINISTRO\n 5:TRANSFERIRSEGURO\n");
+            System.out.println("escolha\n 1:CADASTAR\n 2:LISTAR\n 3:EXCLUIR\n 4:GERARSINISTRO\n 5:TRANSFERIRSEGURO");
             System.out.println(" 6:CALCULAR RECEITA SEGURADORA\n 7:AUTORIZAR CONDUTOR\n 0:SAIR\n");
             valor = input.nextInt();
 
@@ -127,7 +134,7 @@ public class AppMain {
         } while(valor != 0) ;
 
         input.close();
-       
+        
         
         
 

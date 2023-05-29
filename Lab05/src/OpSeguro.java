@@ -109,7 +109,7 @@ public class OpSeguro {
 
             SeguroPJ novoSeguro = new SeguroPJ(LocalDate.of(anoI,mesI,diaI),LocalDate.of(anoF, mesF, diaF), seguradora, (ClientePJ)cliente);
             if (seguradora.cadastrarSeguro(novoSeguro)) {
-                System.out.println("Novo seguro" + novoSeguro.getId() + "cadastrado com sucesso!");
+                System.out.println("Novo seguro " + novoSeguro.getId() + "cadastrado com sucesso!");
                 return true;
             }
         }

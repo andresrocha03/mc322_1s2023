@@ -24,6 +24,9 @@ public class OpCliente {
     public static Cliente escolherCliente(Seguradora seguradora){
         //funcao que devolve o objeto cliente, sabendo em que seguradora este esta
         Scanner input = new Scanner(System.in);
+        System.out.println("clientes disponiveis: ");
+        seguradora.getListaClientes("PF");
+        seguradora.getListaClientes("PJ");
         System.out.println("nome do cliente?");
         String nome = input.next();
         Cliente cliente=null;
@@ -44,7 +47,7 @@ public class OpCliente {
         int comando;
     
         System.out.println("Qual tipo de cliente  deseja cadastrar? digite o numero correspondente");
-        System.out.println("1:PF/ 2:PJ/ 3:VOLTAR");
+        System.out.println("1:PF/ 2:PJ");
         comando = entrada.nextInt();
         entrada.nextLine();
 

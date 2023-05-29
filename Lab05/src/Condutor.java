@@ -98,13 +98,12 @@ public class Condutor {
 
     public String toString() {
         return "{" +
-            " cpf='" + getCpf() + "'" +
-            ", nome='" + getNome() + "'" +
-            ", telefone='" + getTelefone() + "'" +
-            ", endereco='" + getEndereco() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", dataNasc='" + getDataNasc() + "'" +
-            ", listaSinistros='" + getListaSinistros() + "'" +
+            " cpf='" + this.getCpf() + "'" +
+            ", nome='" + this.getNome() + "'" +
+            ", telefone='" + this.getTelefone() + "'" +
+            ", endereco='" + this.getEndereco() + "'" +
+            ", email='" + this.getEmail() + "'" +
+            ", dataNasc='" + this.getDataNasc() + "'" +
             "}";
     }
 

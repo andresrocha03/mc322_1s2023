@@ -9,7 +9,7 @@ public enum MenuOperacoes {
     GERAR_SINISTRO(4),
     TRANSFERIR_SEGURO(5),
     CALC_RECEITA_SEGURADORA(6),
-    AUTORIZAR_CONDUTOR(7),
+    AUTORIZACAO_CONDUTOR(7),
     SAIR(0);
     
     public final int valor;
@@ -62,6 +62,7 @@ public enum MenuOperacoes {
                 OpSeguradora.cadastrarSeguradora(listaSeguradora);
             }
             else if (comando == 4) {
+                System.out.println("escolha um clientePJ !");
                 Seguro seguro = OpSeguro.escolherSeguro(seguradora);
                 OpCondutor.cadastrarCondutor(seguro);
             }
@@ -86,8 +87,8 @@ public enum MenuOperacoes {
         
         do {
             System.out.println("O que deseja listar? digite o numero correspondente");
-            System.out.println(" 1:Cliente por Seguradora\n 2:Sinistros por Seguro\n 3:Sinistros por Cliente");
-            System.out.println("4:Veiculos por Cliente\n 5:Veiculos por Seguro\n 6:Seguros por Cliente\n 7:VOLTAR\n");
+            System.out.println("  1:Cliente por Seguradora\n 2:Sinistros por Seguro\n 3:Sinistros por Cliente");
+            System.out.println(" 4:Veiculos por Cliente\n 5:Veiculos por Seguro\n 6:Seguros por Cliente\n 7:VOLTAR\n");
             int comando = input.nextInt();
             if (comando == 1) {
 
@@ -105,17 +106,13 @@ public enum MenuOperacoes {
                 }
             }
             else if (comando == 3) {
-                System.out.println("Digite o nome do cliente: ");
-                String nome = input.next();
+                Cliente cliente = OpCliente.escolherCliente(seguradora); 
                 System.out.println("listando sinistros por Cliente...");
-                Cliente cliente = OpCliente.encontrarCliente(nome, seguradora);
                 seguradora.getSinistrosPorCliente(cliente);
             }   
             else if (comando == 4) {
                 System.out.println("listando veiculos por Cliente...");
-                System.out.println("Digite o nome do cliente");
-                String nome = input.next();
-                Cliente cliente = OpCliente.encontrarCliente(nome, seguradora);
+                Cliente cliente = OpCliente.escolherCliente(seguradora);
                 System.out.println("listando veiculos por Cliente...");
                 if (cliente instanceof ClientePF) {
                     System.out.println(((ClientePF)cliente).getListaVeiculos());
@@ -141,9 +138,7 @@ public enum MenuOperacoes {
                 }
             }
             else if (comando == 6) {
-                System.out.println("Digite o nome do cliente");
-                String nome = input.next();
-                Cliente cliente = OpCliente.encontrarCliente(nome, seguradora);
+                Cliente cliente = OpCliente.escolherCliente(seguradora);
                 System.out.println(seguradora.getSegurosPorCliente(cliente)); 
             }
             else if (comando == 7) {

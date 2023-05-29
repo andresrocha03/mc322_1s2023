@@ -58,14 +58,13 @@ public class Sinistro {
     }
 
 
-    @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", data='" + getData() + "'" +
-            ", endereco='" + getEndereco() + "'" +
-            ", condutor='" + getCondutor() + "'" +
-            ", seguro='" + getSeguro() + "'" +
+            " id='" + this.getId() + "'" +
+            ", data='" + this.getData() + "'" +
+            ", endereco='" + this.getEndereco() + "'" +
+            ", condutor='" + this.getCondutor() + "'" +
+            ", seguro='" + this.getSeguro() + "'" +
             "}";
     }
     

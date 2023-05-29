@@ -30,5 +30,6 @@ public class OpSinistro {
         int dia = input.nextInt();
         //gerar sinistro
         seguro.gerarSinistro(LocalDate.of(ano,mes,dia),endereco,condutor);
+        System.out.println("sinistro gerado com sucesso !");
     }
 }
