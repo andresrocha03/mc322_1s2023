@@ -79,7 +79,7 @@ public class AppMain {
         Condutor condutorJoao = new Condutor("256.457.630-33","Joao", "62996973007", "Rua Girassol", "joao@gmail.com", LocalDate.of(1995,01,01));
         Condutor condutorFuncionario = new Condutor("459.846.700-20","Funcionario", "62991419330", "Rua Tulipa", "funcionario@gmail.com", LocalDate.of(2000,01,01));
         seguradora.getListaSeguros().get(0).cadastrarCondutor(condutorJoao);
-        seguradora.getListaSeguros().get(0).cadastrarCondutor(condutorFuncionario);
+        seguradora.getListaSeguros().get(1).cadastrarCondutor(condutorFuncionario);
         
 
         //gerar sinistro

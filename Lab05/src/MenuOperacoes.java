@@ -40,7 +40,7 @@ public enum MenuOperacoes {
         int comando = -1;
         do {    
             System.out.println("O que deseja cadastrar? digite o numero correspondente");
-            System.out.println("1:CLIENTE\n 2:VEICULO\n 3:SEGURADORA\n 4:CONDUTOR\n 5:FROTA\n 6:SEGURO\n 7:VOLTAR");
+            System.out.println(" 1:CLIENTE\n 2:VEICULO\n 3:SEGURADORA\n 4:CONDUTOR\n 5:FROTA\n 6:SEGURO\n 7:VOLTAR");
             
             comando = input.nextInt();
             
@@ -87,7 +87,7 @@ public enum MenuOperacoes {
         
         do {
             System.out.println("O que deseja listar? digite o numero correspondente");
-            System.out.println("  1:Cliente por Seguradora\n 2:Sinistros por Seguro\n 3:Sinistros por Cliente");
+            System.out.println(" 1:Cliente por Seguradora\n 2:Sinistros por Seguro\n 3:Sinistros por Cliente");
             System.out.println(" 4:Veiculos por Cliente\n 5:Veiculos por Seguro\n 6:Seguros por Cliente\n 7:VOLTAR\n");
             int comando = input.nextInt();
             if (comando == 1) {
@@ -154,8 +154,8 @@ public enum MenuOperacoes {
         
         do {
             System.out.println("O que deseja excluir? digite o numero correspondente");
-            System.out.println(" 1:CLIENTE\n 2:VEICULO\n 3:Sinistro\n");
-            System.out.println(" 4:Frota\n 5:Condutor\n 6:Seguro\n 7: Seguradora \n 8:VOLTAR"); 
+            System.out.println(" 1:Cliente\n 2:Veiculo\n 3:Sinistro");
+            System.out.println(" 4:Frota\n 5:Condutor\n 6:Seguro\n 7:Seguradora \n 8:VOLTAR"); 
             
             int comando = input.nextInt();
             

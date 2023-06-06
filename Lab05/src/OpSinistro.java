@@ -17,6 +17,7 @@ public class OpSinistro {
 
     public static void gerarSinistro(Seguradora seguradora){
         Scanner input = new Scanner(System.in);
+        System.out.println("UTILIZE _ AO INVES DE ESPACOS");
         
         Seguro seguro = OpSeguro.escolherSeguro(seguradora);
         

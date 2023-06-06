@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import javax.swing.plaf.synth.SynthIcon;
-
 import java.time.LocalDate;
 
 public class OpCliente {
